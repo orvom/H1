@@ -1,0 +1,1394 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پودمان ۲ · حل کار عملی‌های تهیه و تنظیم صورت سود و زیان</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;700;800&display=swap"><style>
+/* Layout: teal cover band, one notebook column; each practical work is a paper card; tables scroll sideways inside the card */
+:root { --bg:#f2f5f7; --paper:#fff; --ink:#16232b; --muted:#5a6b75; --rule:#d8e1e6; --accent:#0b7a78; --accent-soft:#dff1f0; --band:#0f3b3d; --band-ink:#eaf6f5; --marker:#ffe066; --head:#e9f2f3;
+  --f-display:"Lalezar","Vazirmatn",Tahoma,sans-serif; --f-body:"Vazirmatn",Tahoma,"Segoe UI",sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0c1317; --paper:#131e24; --ink:#e4edf1; --muted:#93a6b0; --rule:#26353d; --accent:#45c9c4; --accent-soft:#163332; --band:#0a2a2c; --band-ink:#e4f4f3; --marker:#6b5a12; --head:#1a2a31; color-scheme:dark; } }
+:root[data-theme="dark"] { --bg:#0c1317; --paper:#131e24; --ink:#e4edf1; --muted:#93a6b0; --rule:#26353d; --accent:#45c9c4; --accent-soft:#163332; --band:#0a2a2c; --band-ink:#e4f4f3; --marker:#6b5a12; --head:#1a2a31; color-scheme:dark; }
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.9; }
+.in { max-width:900px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); }
+.hero { background:var(--band); color:var(--band-ink); }
+.hero .in { padding-block:26px 20px; display:flex; flex-direction:column; gap:10px; }
+.hero h1 { font-family:var(--f-display); font-weight:400; font-size:clamp(1.8rem,6vw,2.6rem); line-height:1.35; margin:0; color:#fff; text-wrap:balance; }
+.hero p { margin:0; opacity:.9; max-width:60ch; }
+.eyebrow { font-size:.85rem; opacity:.75; }
+nav.mods, nav.probs { display:flex; flex-wrap:wrap; gap:8px; }
+nav a, nav button { font:inherit; font-size:.9rem; text-decoration:none; color:var(--band-ink); border:1px solid rgba(255,255,255,.4); padding:2px 12px; border-radius:999px; background:transparent; cursor:pointer; }
+nav a:hover, nav button:hover { background:rgba(255,255,255,.14); }
+nav a[aria-current="page"], nav button[aria-pressed="true"] { background:var(--marker); color:#16232b; border-color:var(--marker); font-weight:700; }
+nav.probs a { color:var(--accent); border-color:var(--accent); background:var(--paper); }
+main.in { padding-block:22px 60px; display:flex; flex-direction:column; gap:18px; }
+section.card { background:var(--paper); border:1px solid var(--rule); border-radius:14px; padding:20px; display:flex; flex-direction:column; gap:12px; min-width:0; scroll-margin-top:12px; }
+section.card.intro { background:var(--accent-soft); }
+section.card h2 { font-family:var(--f-display); font-weight:400; font-size:1.5rem; line-height:1.45; margin:0; color:var(--accent); text-wrap:balance; }
+section.card > * { margin:0; }
+p, blockquote { margin:0; }
+blockquote { background:var(--accent-soft); border-inline-start:4px solid var(--accent); padding:8px 14px; border-radius:6px; }
+blockquote p + p { margin-top:6px; }
+.card ul, .card ol { margin:0; padding-inline-start:1.4em; display:flex; flex-direction:column; gap:3px; }
+.scroll { overflow-x:auto; min-width:0; }
+table { border-collapse:collapse; width:100%; font-size:.92rem; font-variant-numeric:tabular-nums; }
+th, td { border-bottom:1px solid var(--rule); padding:5px 9px; text-align:start; vertical-align:top; }
+th { background:var(--head); color:var(--muted); font-size:.84rem; font-weight:700; white-space:nowrap; }
+td.num, th.num { text-align:left; white-space:nowrap; }
+tr:last-child td { border-bottom:0; }
+strong { font-weight:800; }
+sub { font-size:.82rem; color:var(--muted); line-height:1.6; }
+pre { background:var(--bg); border:1px solid var(--rule); border-radius:8px; padding:10px 14px; overflow-x:auto; direction:rtl; font-family:var(--f-body); line-height:1.8; margin:0; }
+code { font-family:var(--f-body); }
+a { color:var(--accent); }
+a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+footer { color:var(--muted); font-size:.85rem; text-align:center; padding-block:10px; }
+</style></head>
+<body>
+<div class="hero"><div class="in">
+<span class="eyebrow">حسابداری تهیه و تنظیم صورت‌های مالی · کد ۲۱۲۲۵۴ · پایه دوازدهم</span>
+<h1>پودمان ۲ · حل کار عملی‌های تهیه و تنظیم صورت سود و زیان</h1>
+<nav class="mods" aria-label="پودمان‌ها"><a href="index.html">فهرست</a><a href="podman-1.html">پودمان ۱</a><a href="podman-2.html" aria-current="page">پودمان ۲</a><a href="podman-3.html">پودمان ۳</a><a href="podman-4.html">پودمان ۴</a><a href="podman-5.html">پودمان ۵</a></nav>
+<nav class="probs" aria-label="کار عملی‌ها"><a href="#m2-1">۱</a><a href="#m2-2">۲</a><a href="#m2-3">۳</a><a href="#m2-4">۴</a><a href="#m2-5">۵</a><a href="#m2-6">۶</a><a href="#m2-7">۷</a><a href="#m2-8">۸</a><a href="#m2-9">۹</a><a href="#m2-10">۱۰</a><a href="#m2-11">۱۱</a><a href="#m2-extra">مسئله‌ی پایان فصل</a></nav>
+</div></div>
+<main class="in">
+<section class="card intro">
+<p>کتاب: «حسابداری تهیه و تنظیم صورت‌های مالی» (کد ۲۱۲۲۵۴). ارقام همه‌جا به <strong>ریال</strong> است مگر جایی که نوشته شده؛ عدد داخل پرانتز یعنی کاهنده/منفی.</p>
+<blockquote>
+<p>فرمول‌های اصلی این پودمان: فروش خالص = فروش − (برگشت از فروش + تخفیفات نقدی فروش) · خرید خالص = خرید − (برگشت از خرید + تخفیفات نقدی خرید) · بهای تمام‌شده کالای خریداری‌شده = خرید خالص + هزینه حمل خرید · بهای کالای فروش‌رفته = موجودی اول + بهای کالای خریداری‌شده − موجودی پایان · سود ناخالص = فروش خالص − بهای کالای فروش‌رفته · سود عملیاتی = سود ناخالص − هزینه‌های عملیاتی ± سایر اقلام عملیاتی.</p>
+</blockquote>
+
+</section>
+<section class="card" id="m2-1"><h2>کار عملی ۱ · سود خالص مؤسسه شیراز</h2>
+<p><strong>صورت مسئله:</strong> درآمد عملیاتی ۹٬۳۰۰٬۰۰۰ · درآمد غیرعملیاتی ۲٬۱۵۰٬۰۰۰ · هزینه غیرعملیاتی ۳۲۰٬۰۰۰ · هزینه عملیاتی ۵٬۰۳۰٬۰۰۰ · مالیات بر درآمد ۱٬۵۲۵٬۰۰۰. سود (زیان) خالص را حساب کنید.</p>
+<p><strong>صورت سود و زیان مؤسسه شیراز</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمدهای عملیاتی</td>
+<td class="num"></td>
+<td class="num">۹٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>هزینه‌های عملیاتی</td>
+<td class="num"></td>
+<td class="num">(۵٬۰۳۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود عملیاتی</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۴٬۲۷۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>درآمدهای غیرعملیاتی</td>
+<td class="num"></td>
+<td class="num">۲٬۱۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>هزینه‌های غیرعملیاتی</td>
+<td class="num"></td>
+<td class="num">(۳۲۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود خالص قبل از مالیات</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۶٬۱۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>مالیات بر درآمد</td>
+<td class="num"></td>
+<td class="num">(۱٬۵۲۵٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود خالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۴٬۵۷۵٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جواب:</strong> سود خالص = <strong>۴٬۵۷۵٬۰۰۰</strong> ریال.</p>
+
+</section>
+<section class="card" id="m2-2"><h2>کار عملی ۲ · صورت سود و زیان مؤسسه آموزشی اراک</h2>
+<p><strong>صورت مسئله:</strong> مانده‌های سال ۱۳۹۶: حقوق مدرسان ۲٬۴۵۰٬۰۰۰ · آب و برق اداری ۳۶۰٬۵۰۰ · آگهی ۵۳۴٬۰۰۰ · درآمد ارائه خدمات ۶٬۹۸۰٬۰۰۰ · ملزومات اداری ۶۸٬۰۰۰ · استهلاک ساختمان اداری ۱٬۴۲۰٬۰۰۰ · پیش‌دریافت درآمد ۲٬۶۰۰٬۰۰۰ · ملزومات بخش آموزشی ۱۴۰٬۰۰۰ · حقوق کارکنان اداری ۱٬۱۲۰٬۰۰۰. صورت سود و زیان تنظیم شود.</p>
+<p><strong>اول تفکیک کنیم:</strong> حقوق مدرسان و ملزومات بخش آموزشی مستقیم به ارائه‌ی خدمات مربوطه ← «بهای تمام‌شده‌ی خدمات ارائه‌شده». بقیه اداری/فروش ← «هزینه‌های عملیاتی». «پیش‌دریافت درآمد» بدهیه و توی صورت سود و زیان نمیاد (فقط تو ترازنامه می‌ره).</p>
+<p><strong>مؤسسه آموزشی اراک · سال مالی منتهی به ۱۳۹۶/۱۲/۲۹</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمد خدمات</td>
+<td class="num"></td>
+<td class="num">۶٬۹۸۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده خدمات ارائه‌شده (حقوق مدرسان ۲٬۴۵۰٬۰۰۰ + ملزومات آموزشی ۱۴۰٬۰۰۰)</td>
+<td class="num"></td>
+<td class="num">(۲٬۵۹۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود ناخالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۴٬۳۹۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های عملیاتی:</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه آب و برق بخش اداری</td>
+<td class="num">۳۶۰٬۵۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه آگهی</td>
+<td class="num">۵۳۴٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه ملزومات بخش اداری</td>
+<td class="num">۶۸٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه استهلاک ساختمان اداری</td>
+<td class="num">۱٬۴۲۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حقوق کارکنان اداری</td>
+<td class="num">۱٬۱۲۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>جمع هزینه‌های عملیاتی</td>
+<td class="num"></td>
+<td class="num">(۳٬۵۰۲٬۵۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود عملیاتی</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۸۸۷٬۵۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+<section class="card" id="m2-3"><h2>کار عملی ۳ · سود عملیاتی بازرگانی خوزستان</h2>
+<p><strong>صورت مسئله:</strong> مانده‌های ۱۳۹۶ (فروش ۴۸٬۴۲۰٬۷۰۰، خرید ۳۶٬۴۰۰٬۵۰۰، موجودی اول ۱۴٬۹۰۰٬۰۰۰، موجودی پایان ۱۷٬۴۵۰٬۰۰۰ و هزینه‌ها) داده شده. سود (زیان) عملیاتی حساب شود.</p>
+<p><strong>صورت سود و زیان مؤسسه بازرگانی خوزستان · ۱۳۹۶/۱۲/۲۹</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فروش کاال</td>
+<td class="num"></td>
+<td class="num">۴۸٬۴۲۰٬۷۰۰</td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">(۲٬۱۶۰٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تخفیفات نقدی فروش</td>
+<td class="num">(۹۷۰٬۸۵۰)</td>
+<td class="num">(۳٬۱۳۰٬۸۵۰)</td>
+</tr>
+<tr>
+<td><strong>فروش خالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۴۵٬۲۸۹٬۸۵۰</strong></td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته:</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی کالای اول دوره</td>
+<td class="num">۱۴٬۹۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>خرید کالا</td>
+<td class="num">۳۶٬۴۰۰٬۵۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>برگشت از خرید و تخفیفات</td>
+<td class="num">(۱٬۶۰۰٬۳۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تخفیفات نقدی خرید</td>
+<td class="num">(۴۴۰٬۶۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>خرید خالص</td>
+<td class="num">۳۴٬۳۵۹٬۶۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حمل کالای خریداری‌شده</td>
+<td class="num">۳۴۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای خریداری‌شده</td>
+<td class="num"></td>
+<td class="num">۳۴٬۶۹۹٬۶۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای آماده برای فروش</td>
+<td class="num"></td>
+<td class="num">۴۹٬۵۹۹٬۶۰۰</td>
+</tr>
+<tr>
+<td>موجودی کالای پایان دوره</td>
+<td class="num"></td>
+<td class="num">(۱۷٬۴۵۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num"></td>
+<td class="num">(۳۲٬۱۴۹٬۶۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود (زیان) ناخالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۱۳٬۱۴۰٬۲۵۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های فروش، عمومی و اداری:</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حقوق فروشندگان</td>
+<td class="num">۲٬۴۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه بازاریابی</td>
+<td class="num">۷۶۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حمل کالای فروش‌رفته</td>
+<td class="num">۲۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه آب و برق فروشگاه</td>
+<td class="num">۲۸٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه ملزومات اداری</td>
+<td class="num">۱۷۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه آب و برق بخش اداری</td>
+<td class="num">۵۱۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه استهلاک ساختمان اداری</td>
+<td class="num">۸۲۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه بیمه کارکنان اداری</td>
+<td class="num">۶۴۸٬۲۴۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>جمع هزینه‌های عملیاتی</td>
+<td class="num"></td>
+<td class="num">(۵٬۶۴۶٬۲۴۰)</td>
+</tr>
+<tr>
+<td><strong>سود (زیان) عملیاتی</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۷٬۴۹۴٬۰۱۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جواب:</strong> سود عملیاتی = <strong>۷٬۴۹۴٬۰۱۰</strong> ریال.</p>
+
+</section>
+<section class="card" id="m2-4"><h2>کار عملی ۴ · گزارش‌های تفکیکی بازرگانی سبزوار</h2>
+<p><strong>صورت مسئله:</strong> با ۳ گزارش تفکیکی (بهای کالای خریداری‌شده، بهای کالای فروش‌رفته، سود عملیاتی) سود (زیان) عملیاتی ۱۳۹۵ حساب شود.</p>
+<p><strong>گزارش ۱: بهای تمام‌شده کالای خریداری‌شده</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>خرید کالا</td>
+<td class="num"></td>
+<td class="num">۷۹٬۴۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>برگشت از خرید و تخفیفات</td>
+<td class="num">(۷۲۰٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تخفیفات نقدی خرید (در مسئله نداریم)</td>
+<td class="num">۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>خرید خالص</td>
+<td class="num"></td>
+<td class="num">۷۸٬۶۸۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>هزینه حمل کالای خریداری‌شده</td>
+<td class="num"></td>
+<td class="num">۳۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>بهای تمام‌شده کالای خریداری‌شده</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۷۹٬۰۳۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>گزارش ۲: بهای تمام‌شده کالای فروش‌رفته</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>موجودی کالای اول دوره</td>
+<td class="num"></td>
+<td class="num">۹٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای خریداری‌شده</td>
+<td class="num"></td>
+<td class="num">۷۹٬۰۳۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای آماده برای فروش</td>
+<td class="num"></td>
+<td class="num">۸۸٬۳۳۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>موجودی کالای پایان دوره</td>
+<td class="num"></td>
+<td class="num">(۷٬۴۵۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>بهای تمام‌شده کالای فروش‌رفته</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۸۰٬۸۸۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>گزارش ۳: سود (زیان) عملیاتی</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فروش کالا</td>
+<td class="num"></td>
+<td class="num">۸۴٬۸۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">(۲٬۱۵۰٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تخفیفات نقدی فروش</td>
+<td class="num">(۶۵۰٬۰۰۰)</td>
+<td class="num">(۲٬۸۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>فروش خالص</td>
+<td class="num"></td>
+<td class="num">۸۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num"></td>
+<td class="num">(۸۰٬۸۸۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود ناخالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۱٬۱۲۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های فروش، عمومی و اداری:</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حقوق فروشندگان</td>
+<td class="num">۶۳۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه آگهی</td>
+<td class="num">۴۴۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حمل کالای فروش‌رفته</td>
+<td class="num">۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه ایاب و ذهاب بخش فروشگاه</td>
+<td class="num">۱۶۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه پذیرایی و آبدارخانه اداری</td>
+<td class="num">۲۱۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه متفرقه اداری</td>
+<td class="num">۲۸۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>جمع هزینه‌های عملیاتی</td>
+<td class="num"></td>
+<td class="num">(۲٬۰۲۵٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>زیان عملیاتی</strong></td>
+<td class="num"></td>
+<td class="num"><strong>(۹۰۵٬۰۰۰)</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جواب:</strong> سود ناخالص ۱٬۱۲۰٬۰۰۰ کمتر از هزینه‌های عملیاتی (۲٬۰۲۵٬۰۰۰) است، پس مؤسسه <strong>زیان عملیاتی ۹۰۵٬۰۰۰ ریال</strong> دارد.</p>
+
+</section>
+<section class="card" id="m2-5"><h2>کار عملی ۵ · صورت سود و زیان واحد تجاری گلستان</h2>
+<p><strong>صورت مسئله:</strong> فروش و تعمیر گوشی همراه (فروش ۱۴۵٬۳۰۰٬۰۰۰ + ارائه خدمات ۳۷٬۲۰۰٬۰۰۰، خرید ۱۱۵٬۷۰۰٬۰۰۰، موجودی اول ۵۹٬۱۰۰٬۰۰۰، موجودی پایان ۷۱٬۶۰۰٬۰۰۰ و ۱۰ هزینه‌ی عملیاتی و کسری انبار). صورت سود و زیان ۱۳۹۶ تنظیم شود.</p>
+<p>«کسری انبار» جزو <strong>سایر اقلام عملیاتی</strong> است (نه هزینه‌ی فروش و اداری). درآمد خدمات هم کنار فروش خالص می‌آید و چون بهای خدمات جدا داده نشده، فقط بهای کالای فروش‌رفته کسر می‌شود.</p>
+<p><strong>واحد تجاری گلستان · سال مالی ۱۳۹۶</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فروش تلفن همراه</td>
+<td class="num"></td>
+<td class="num">۱۴۵٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">(۲٬۱۶۰٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>فروش خالص</td>
+<td class="num"></td>
+<td class="num">۱۴۳٬۱۴۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>درآمد ارائه خدمات (تعمیرات و نصب برنامه)</td>
+<td class="num"></td>
+<td class="num">۳۷٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>فروش خالص و درآمد ارائه خدمات</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۱۸۰٬۳۴۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>موجودی کالای اول دوره</td>
+<td class="num">۵۹٬۱۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>خرید کالا</td>
+<td class="num">۱۱۵٬۷۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>برگشت از خرید و تخفیفات</td>
+<td class="num">(۳٬۲۰۰٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>خرید خالص</td>
+<td class="num">۱۱۲٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حمل کالای خریداری‌شده</td>
+<td class="num">۴٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای آماده برای فروش</td>
+<td class="num"></td>
+<td class="num">۱۷۵٬۹۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>موجودی کالای پایان دوره</td>
+<td class="num"></td>
+<td class="num">(۷۱٬۶۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num"></td>
+<td class="num">(۱۰۴٬۳۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود ناخالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۷۶٬۰۴۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های فروش، عمومی و اداری:</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حقوق حسابدار</td>
+<td class="num">۳٬۶۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه استهلاک ساختمان فروشگاه</td>
+<td class="num">۴٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه پذیرایی و آبدارخانه فروشگاه</td>
+<td class="num">۷۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه تلفن و مخابرات فروشگاه</td>
+<td class="num">۴۹۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه ملزومات اداری</td>
+<td class="num">۱۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه آب و برق فروشگاه</td>
+<td class="num">۴۲۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه بیمه سهم کارفرما</td>
+<td class="num">۶۸۴٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه استهلاک نرم‌افزار حسابداری</td>
+<td class="num">۳۷۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه نگهداری دارایی‌های ثابت</td>
+<td class="num">۲٬۴۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه چاپ و تکثیر فاکتور</td>
+<td class="num">۱٬۳۸۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>جمع هزینه‌های عملیاتی</td>
+<td class="num"></td>
+<td class="num">(۱۴٬۴۹۹٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سایر درآمدها و هزینه‌های عملیاتی: کسری انبار</td>
+<td class="num"></td>
+<td class="num">(۶۴۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود عملیاتی</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۶۰٬۹۰۱٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جواب:</strong> سود ناخالص ۷۶٬۰۴۰٬۰۰۰ ← سود عملیاتی <strong>۶۰٬۹۰۱٬۰۰۰</strong> ریال.</p>
+
+</section>
+<section class="card" id="m2-6"><h2>کار عملی ۶ · پر کردن مجهول‌ها (ابیانه، قمصر، نیاسر)</h2>
+<p><strong>صورت مسئله:</strong> جدول سه مؤسسه با چند مجهول (؟) داده شده؛ با روابط بهای تمام‌شده و سود ناخالص مبلغ صحیح نوشته شود.</p>
+<p><strong>ایده:</strong> از ستونی شروع کن که اطلاعات بیشتری داره و بالا یا پایین بیا:</p>
+<ul>
+<li>خرید خالص = خرید − برگشت از خرید</li>
+<li>بهای کالای خریداری‌شده = خرید خالص + حمل</li>
+<li>آماده برای فروش = موجودی اول + بهای کالای خریداری‌شده</li>
+<li>کالای فروش‌رفته = آماده برای فروش − موجودی پایان</li>
+<li>سود ناخالص = فروش خالص − کالای فروش‌رفته</li>
+</ul>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">مؤسسه ابیانه</th>
+<th class="num">مؤسسه قمصر</th>
+<th class="num">مؤسسه نیاسر</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فروش خالص</td>
+<td class="num">۵٬۳۲۰٬۰۰۰ ✅</td>
+<td class="num">۱۲٬۶۳۰٬۰۰۰</td>
+<td class="num">۵٬۸۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>موجودی کالای اول دوره</td>
+<td class="num">۱٬۴۵۰٬۰۰۰</td>
+<td class="num">۴٬۳۰۰٬۰۰۰</td>
+<td class="num">۹۴۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>خرید کالا</td>
+<td class="num">۲٬۷۴۰٬۰۰۰</td>
+<td class="num">۱۰٬۹۱۰٬۰۰۰ ✅</td>
+<td class="num">۳٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>برگشت از خرید و تخفیفات</td>
+<td class="num">۱۴۰٬۰۰۰ ✅</td>
+<td class="num">۳۶۰٬۰۰۰</td>
+<td class="num">۱۶۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>هزینه حمل کالای خریداری‌شده</td>
+<td class="num">۵۰٬۰۰۰</td>
+<td class="num">۱۴۰٬۰۰۰</td>
+<td class="num">۹۵٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای کالای آماده برای فروش</td>
+<td class="num">۴٬۱۰۰٬۰۰۰</td>
+<td class="num">۱۴٬۹۹۰٬۰۰۰</td>
+<td class="num">۴٬۰۷۵٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>موجودی کالای پایان دوره</td>
+<td class="num">۱٬۶۰۰٬۰۰۰</td>
+<td class="num">۲٬۱۰۰٬۰۰۰ ✅</td>
+<td class="num">۸۷۵٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num">۲٬۵۰۰٬۰۰۰ ✅</td>
+<td class="num">۱۲٬۸۹۰٬۰۰۰</td>
+<td class="num">۳٬۲۰۰٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>سود (زیان) ناخالص</td>
+<td class="num">۲٬۸۲۰٬۰۰۰</td>
+<td class="num">(۲۶۰٬۰۰۰) ✅</td>
+<td class="num">۲٬۶۵۰٬۰۰۰ ✅</td>
+</tr>
+</tbody>
+</table></div>
+<p>(✅ = مقداری که ما حساب کردیم.) قمصر <strong>زیان ناخالص ۲۶۰٬۰۰۰ ریال</strong> دارد چون کالای فروش‌رفته از فروش خالص بیشتره.</p>
+
+</section>
+<section class="card" id="m2-7"><h2>کار عملی ۷ · پر کردن مجهول‌ها در سه سال (مؤسسه سقز)</h2>
+<p><strong>صورت مسئله:</strong> اطلاعات ۱۳۹۴ تا ۱۳۹۶ با چند مجهول داده شده؛ مبالغ صحیح درج شود.</p>
+<p><strong>نکته‌ی کلیدی:</strong> موجودی پایان هر سال = موجودی اول سال بعد. با همین، ۱۳۹۵ حل می‌شه: موجودی پایان ۱۳۹۵ برابر موجودی اول ۱۳۹۶ (۳٬۱۸۰٬۰۰۰) است.
+و کنترل مستقل: موجودی اول ۱۳۹۵ که از حل ۱۳۹۵ درآمد (۱٬۷۸۰٬۰۰۰) دقیقاً با موجودی پایان ۱۳۹۴ که کتاب داده برابره ✅.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">۱۳۹۴</th>
+<th class="num">۱۳۹۵</th>
+<th class="num">۱۳۹۶</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فروش کالا</td>
+<td class="num">۷٬۰۰۰٬۰۰۰</td>
+<td class="num">۸٬۵۴۰٬۰۰۰ ✅</td>
+<td class="num">۱۰٬۰۸۰٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">۱۴۰٬۰۰۰</td>
+<td class="num">۲۷۰٬۰۰۰</td>
+<td class="num">۴۱۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>تخفیفات نقدی فروش</td>
+<td class="num">۱۱۰٬۰۰۰</td>
+<td class="num">۱۰۰٬۰۰۰</td>
+<td class="num">۱۷۵٬۰۰۰</td>
+</tr>
+<tr>
+<td>فروش خالص</td>
+<td class="num">۶٬۷۵۰٬۰۰۰ ✅</td>
+<td class="num">۸٬۱۷۰٬۰۰۰ ✅</td>
+<td class="num">۹٬۴۹۵٬۰۰۰</td>
+</tr>
+<tr>
+<td>موجودی کالای اول دوره</td>
+<td class="num">۲٬۰۶۰٬۰۰۰</td>
+<td class="num">۱٬۷۸۰٬۰۰۰ ✅</td>
+<td class="num">۳٬۱۸۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>خرید کالا</td>
+<td class="num">۳٬۶۵۰٬۰۰۰</td>
+<td class="num">۵٬۷۳۰٬۰۰۰ ✅</td>
+<td class="num">۶٬۴۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>برگشت از خرید و تخفیفات</td>
+<td class="num">۳۲۰٬۰۰۰ ✅</td>
+<td class="num">۳۶۰٬۰۰۰</td>
+<td class="num">۳۱۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>تخفیفات نقدی خرید</td>
+<td class="num">۸۰٬۰۰۰</td>
+<td class="num">۷۰٬۰۰۰</td>
+<td class="num">۶۵٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>خرید خالص</td>
+<td class="num">۳٬۲۵۰٬۰۰۰</td>
+<td class="num">۵٬۳۰۰٬۰۰۰</td>
+<td class="num">۶٬۰۲۵٬۰۰۰</td>
+</tr>
+<tr>
+<td>هزینه حمل کالای خریداری‌شده</td>
+<td class="num">۱۴۰٬۰۰۰</td>
+<td class="num">۱۵۰٬۰۰۰</td>
+<td class="num">۴۵٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>بهای کالای خریداری‌شده طی دوره</td>
+<td class="num">۳٬۳۹۰٬۰۰۰ ✅</td>
+<td class="num">۵٬۴۵۰٬۰۰۰ ✅</td>
+<td class="num">۶٬۰۷۰٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>بهای کالای آماده برای فروش</td>
+<td class="num">۵٬۴۵۰٬۰۰۰ ✅</td>
+<td class="num">۷٬۲۳۰٬۰۰۰ ✅</td>
+<td class="num">۹٬۲۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>موجودی کالای پایان دوره</td>
+<td class="num">۱٬۷۸۰٬۰۰۰</td>
+<td class="num">۳٬۱۸۰٬۰۰۰ ✅</td>
+<td class="num">۲٬۳۴۰٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num">۳٬۶۷۰٬۰۰۰ ✅</td>
+<td class="num">۴٬۰۵۰٬۰۰۰</td>
+<td class="num">۶٬۹۱۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سود ناخالص</td>
+<td class="num">۳٬۰۸۰٬۰۰۰ ✅</td>
+<td class="num">۴٬۱۲۰٬۰۰۰ ✅</td>
+<td class="num">۲٬۵۸۵٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>هزینه‌های عملیاتی</td>
+<td class="num">۹۸۰٬۰۰۰</td>
+<td class="num">۱٬۴۱۰٬۰۰۰</td>
+<td class="num">۱٬۹۶۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>خالص سایر درآمدها و هزینه‌های عملیاتی</td>
+<td class="num">۴۰۰٬۰۰۰ ✅</td>
+<td class="num">۸۴۰٬۰۰۰</td>
+<td class="num">(۷۳۰٬۰۰۰) ✅</td>
+</tr>
+<tr>
+<td>سود (زیان) عملیاتی</td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+<td class="num">۳٬۵۵۰٬۰۰۰</td>
+<td class="num">(۱۰۵٬۰۰۰)</td>
+</tr>
+</tbody>
+</table></div>
+<p>(✅ = مقدار محاسبه‌شده؛ بقیه خود کتاب داده.)</p>
+
+</section>
+<section class="card" id="m2-8"><h2>کار عملی ۸ · گزارش سود و زیان بازرگانی گلپایگان</h2>
+<p><strong>صورت مسئله:</strong> فروش خالص ۱۲۸٬۳۰۰٬۰۰۰ · کالای فروش‌رفته ۸۳٬۴۰۰٬۰۰۰ · توزیع و فروش ۲۰٬۹۰۰٬۰۰۰ · عمومی و اداری ۱۸٬۴۱۰٬۰۰۰ · سایر درآمد عملیاتی ۳٬۱۴۰٬۰۰۰ · سایر هزینه عملیاتی ۴٬۸۵۰٬۰۰۰ · هزینه مالی ۴۴۰٬۰۰۰ · درآمد غیرعملیاتی ۴٬۷۲۰٬۰۰۰ · هزینه غیرعملیاتی ۳٬۸۶۰٬۰۰۰.</p>
+<p><strong>مؤسسه بازرگانی گلپایگان · ۱۳۹۶</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فروش خالص</td>
+<td class="num"></td>
+<td class="num">۱۲۸٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num"></td>
+<td class="num">(۸۳٬۴۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود ناخالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۴۴٬۹۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های توزیع و فروش</td>
+<td class="num">۲۰٬۹۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه‌های عمومی و اداری</td>
+<td class="num">۱۸٬۴۱۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>جمع هزینه‌های فروش، عمومی و اداری</td>
+<td class="num"></td>
+<td class="num">(۳۹٬۳۱۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سایر درآمدهای عملیاتی</td>
+<td class="num">۳٬۱۴۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سایر هزینه‌های عملیاتی</td>
+<td class="num">(۴٬۸۵۰٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>خالص سایر درآمدها و هزینه‌های عملیاتی</td>
+<td class="num"></td>
+<td class="num">(۱٬۷۱۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود عملیاتی</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۳٬۸۸۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های مالی</td>
+<td class="num"></td>
+<td class="num">(۴۴۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سایر درآمدها و هزینه‌های غیرعملیاتی (۴٬۷۲۰٬۰۰۰ − ۳٬۸۶۰٬۰۰۰)</td>
+<td class="num"></td>
+<td class="num">۸۶۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>سود خالص قبل از مالیات</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۴٬۳۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>مالیات بر درآمد تو مسئله داده نشده، پس تا «سود خالص قبل از مالیات» <strong>۴٬۳۰۰٬۰۰۰</strong> ریال پیش می‌ریم (اگه مالیات صفر باشه، سود خالص هم همینه).</p>
+
+</section>
+<section class="card" id="m2-9"><h2>کار عملی ۹ · صورت سود و زیان خدماتی ـ بازرگانی شاهرود</h2>
+<p><strong>صورت مسئله:</strong> درآمد عملیاتی ۴۳٬۰۰۰٬۰۰۰ · سایر درآمد عملیاتی ۲٬۱۰۰٬۰۰۰ · بهای تمام‌شده درآمدهای عملیاتی ۳۱٬۲۰۰٬۰۰۰ · فروش، عمومی و اداری ۴٬۳۰۰٬۰۰۰ · درآمد غیرعملیاتی ۳٬۲۰۰٬۰۰۰ · هزینه غیرعملیاتی ۲٬۶۰۰٬۰۰۰ · هزینه مالی ۷۰۰٬۰۰۰ · مالیات ۲٬۳۷۵٬۰۰۰.</p>
+<p><strong>مؤسسه شاهرود · ۱۳۹۶</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمدهای عملیاتی</td>
+<td class="num"></td>
+<td class="num">۴۳٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده درآمدهای عملیاتی</td>
+<td class="num"></td>
+<td class="num">(۳۱٬۲۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود ناخالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۱۱٬۸۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های فروش، عمومی و اداری</td>
+<td class="num"></td>
+<td class="num">(۴٬۳۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سایر درآمدهای عملیاتی</td>
+<td class="num"></td>
+<td class="num">۲٬۱۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>سود عملیاتی</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۹٬۶۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های مالی</td>
+<td class="num"></td>
+<td class="num">(۷۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سایر درآمدها و هزینه‌های غیرعملیاتی (۳٬۲۰۰٬۰۰۰ − ۲٬۶۰۰٬۰۰۰)</td>
+<td class="num"></td>
+<td class="num">۶۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>سود خالص قبل از مالیات</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۹٬۵۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>مالیات بر درآمد</td>
+<td class="num"></td>
+<td class="num">(۲٬۳۷۵٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود خالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۷٬۱۲۵٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>سود خالص = <strong>۷٬۱۲۵٬۰۰۰</strong> ریال. (مالیات ۲٬۳۷۵٬۰۰۰ دقیقاً ۲۵٪ سود قبل از مالیاته، یعنی داده‌ها همخونی دارن.)</p>
+
+</section>
+<section class="card" id="m2-10"><h2>کار عملی ۱۰ · صورت سود و زیان فروش و تعمیر موتورسیکلت (چابهار)</h2>
+<p><strong>صورت مسئله:</strong> مانده‌های ۱۳۹۵ در ۸ گروه (الف تا ح) داده شده؛ صورت سود و زیان طبقه‌بندی‌شده تنظیم و سود خالص حساب شود.</p>
+<p><strong>محاسبات کمکی:</strong> </p>
+<ul>
+<li>فروش خالص = ۱۹۰٬۰۰۰٬۰۰۰ + ۴۱٬۵۰۰٬۰۰۰ (تعمیرات) − ۶٬۱۴۰٬۰۰۰ − ۸۹۰٬۰۰۰ = <strong>۲۲۴٬۴۷۰٬۰۰۰</strong></li>
+<li>بهای کالای خریداری‌شده = (۱۲۴٬۰۰۰٬۰۰۰ − ۳٬۴۰۰٬۰۰۰ − ۳۵۰٬۰۰۰) + حمل ۲٬۳۰۰٬۰۰۰ + تخلیه ۲۵۰٬۰۰۰ = ۱۲۲٬۸۰۰٬۰۰۰ (هزینه‌ی تخلیه هزینه‌ی مستقیم کالای خریداری‌شده است)</li>
+<li>بهای کالای فروش‌رفته = ۵۳٬۰۰۰٬۰۰۰ + ۱۲۲٬۸۰۰٬۰۰۰ − ۶۱٬۰۰۰٬۰۰۰ = ۱۱۴٬۸۰۰٬۰۰۰</li>
+<li>بهای خدمات ارائه‌شده = حقوق تعمیرکاران ۴٬۱۸۰٬۰۰۰ + آب و برق تعمیرگاه ۴۱۰٬۰۰۰ + استهلاک تجهیزات تعمیرگاه ۴۶۰٬۰۰۰ = ۵٬۰۵۰٬۰۰۰</li>
+</ul>
+<p><strong>مؤسسه چابهار · سال مالی ۱۳۹۵</strong> (ریال)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">جزء</th>
+<th class="num">کل</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فروش موتورسیکلت</td>
+<td class="num">۱۹۰٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تعمیرات موتورسیکلت</td>
+<td class="num">۴۱٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">(۶٬۱۴۰٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تخفیفات نقدی فروش</td>
+<td class="num">(۸۹۰٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td><strong>فروش خالص و درآمد ارائه خدمات</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۲۲۴٬۴۷۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num">۱۱۴٬۸۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>بهای تمام‌شده خدمات ارائه‌شده</td>
+<td class="num">۵٬۰۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته و خدمات ارائه‌شده</td>
+<td class="num"></td>
+<td class="num">(۱۱۹٬۸۵۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود ناخالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۱۰۴٬۶۲۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های فروش، عمومی و اداری:</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حمل کالای فروش‌رفته</td>
+<td class="num">۲۹۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه آگهی</td>
+<td class="num">۴۳۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه ملزومات اداری</td>
+<td class="num">۳۶۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه پذیرایی بخش اداری</td>
+<td class="num">۱۷۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه بیمه ساختمان اداری</td>
+<td class="num">۹۳۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حقوق حسابدار</td>
+<td class="num">۱٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه استهلاک اثاثه فروشگاه</td>
+<td class="num">۴۳۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه حقوق فروشندگان</td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>جمع هزینه‌های عملیاتی</td>
+<td class="num"></td>
+<td class="num">(۴٬۹۲۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سایر درآمدها و هزینه‌های عملیاتی:</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سود فروش ضایعات</td>
+<td class="num">۲۱٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>اضافی انبار</td>
+<td class="num">۶٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>هزینه کاهش ارزش موجودی کالا</td>
+<td class="num">(۶۲۵٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>کسری صندوق</td>
+<td class="num">(۱۶۳٬۰۰۰)</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>خالص سایر درآمدها و هزینه‌های عملیاتی</td>
+<td class="num"></td>
+<td class="num">۲۶٬۴۱۲٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>سود عملیاتی</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۱۲۶٬۱۱۲٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>هزینه‌های مالی</td>
+<td class="num"></td>
+<td class="num">(۲۸۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سایر درآمدها و هزینه‌های غیرعملیاتی: سود سپرده ۱۲٬۵۵۰٬۶۰۰ + سود فروش تجهیزات ۳٬۹۰۰٬۰۰۰ + سود معاوضه ۲۴۰٬۰۰۰ − زیان معاوضه ۱۶۴٬۰۰۰</td>
+<td class="num"></td>
+<td class="num">۱۶٬۵۲۶٬۶۰۰</td>
+</tr>
+<tr>
+<td><strong>سود خالص قبل از مالیات</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۱۴۲٬۳۵۸٬۶۰۰</strong></td>
+</tr>
+<tr>
+<td>مالیات بر درآمد</td>
+<td class="num"></td>
+<td class="num">(۲۵٬۶۵۲٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود خالص</strong></td>
+<td class="num"></td>
+<td class="num"><strong>۱۱۶٬۷۰۶٬۶۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود خالص = ۱۱۶٬۷۰۶٬۶۰۰ ریال.</strong></p>
+
+</section>
+<section class="card" id="m2-11"><h2>کار عملی ۱۱ · تعدیلات سنواتی و سود انباشته (مؤسسه کرج)</h2>
+<p><strong>صورت مسئله:</strong> سود انباشته اول ۱۳۹۶ برابر ۶٬۹۵۰٬۰۰۰؛ سود خالص ۳٬۱۵۰٬۰۰۰ و سود تخصیص‌یافته ۳٬۰۰۰٬۰۰۰. تجهیزات ۱۶٬۰۰۰٬۰۰۰ آخر خرداد ۱۳۹۴ خریده شده (عمر ۵ سال، بدون اسقاط) و استهلاکش هنوز محاسبه نشده. ثبت اصلاح و گردش سود انباشته ۱۳۹۶.</p>
+<p><strong>محاسبه:</strong> استهلاک سالانه = ۱۶٬۰۰۰٬۰۰۰ ÷ ۵ = ۳٬۲۰۰٬۰۰۰. چون دارایی آخر خرداد ۱۳۹۴ خریده شده، از تیر ۱۳۹۴ استهلاک شروع می‌شه: ۱۳۹۴ = ۹ ماه (تیر تا اسفند) = ۳٬۲۰۰٬۰۰۰ × ۹/۱۲ = ۲٬۴۰۰٬۰۰۰، و ۱۳۹۵ = ۳٬۲۰۰٬۰۰۰ ← جمع سال‌های قبل = <strong>۵٬۶۰۰٬۰۰۰</strong>.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>سود و زیان انباشته ـ تعدیلات سنواتی</td>
+<td class="num">۵٬۶۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;استهلاک انباشته تجهیزات</td>
+<td class="num"></td>
+<td class="num">۵٬۶۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>اصلاح اشتباه شناسایی‌نشدن استهلاک سال‌های ۱۳۹۴ و ۱۳۹۵</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>گردش حساب سود (زیان) انباشته ۱۳۹۶</th>
+<th class="num">ریال</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>سود انباشته ابتدای دوره</td>
+<td class="num">۶٬۹۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>تعدیلات سنواتی (بدهکار)</td>
+<td class="num">(۵٬۶۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود انباشته ابتدای سال ـ تعدیل‌شده</strong></td>
+<td class="num"><strong>۱٬۳۵۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>سود خالص سال جاری</td>
+<td class="num">۳٬۱۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>سود قابل تخصیص</strong></td>
+<td class="num"><strong>۴٬۵۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td>تخصیص سود</td>
+<td class="num">(۳٬۰۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td><strong>سود انباشته پایان سال</strong></td>
+<td class="num"><strong>۱٬۵۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>فرض: استهلاک خود سال ۱۳۹۶ جزو فرایند عادی اصلاحات همین سال حساب شده و تو سود خالص ۳٬۱۵۰٬۰۰۰ اعمال شده؛ تعدیل سنواتی فقط مربوط به سال‌های قبل (۱۳۹۴ و ۱۳۹۵) است، مثل مثال بیرجند کتاب.</p>
+</blockquote>
+
+</section>
+<section class="card" id="m2-extra"><h2>مسئله‌ی پایان فصل · مؤسسه خلیج فارس (۱۳۹۴ و ۱۳۹۵، مقایسه‌ای، به هزار ریال)</h2>
+<p><strong>صورت مسئله:</strong> صورت سود و زیان و گزارش سود (زیان) انباشته را برای دو سال مقایسه‌ای (به هزار ریال) تنظیم کنید. مالیات ۲۵٪ و تخصیص سود ۷۵٪ (۱۳۹۴) و ۶۰٪ (۱۳۹۵) از سود قابل تخصیص.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>صورت سود و زیان (هزار ریال)</th>
+<th class="num">۱۳۹۵</th>
+<th class="num">۱۳۹۴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمدهای عملیاتی</td>
+<td class="num">۴۲٬۸۰۰</td>
+<td class="num">۳۹٬۶۰۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده درآمدهای عملیاتی</td>
+<td class="num">(۳۰٬۴۰۰)</td>
+<td class="num">(۲۸٬۶۴۰)</td>
+</tr>
+<tr>
+<td>سود ناخالص</td>
+<td class="num">۱۲٬۴۰۰</td>
+<td class="num">۱۰٬۹۶۰</td>
+</tr>
+<tr>
+<td>هزینه‌های فروش، عمومی و اداری</td>
+<td class="num">(۴٬۱۲۰)</td>
+<td class="num">(۳٬۹۴۰)</td>
+</tr>
+<tr>
+<td>سایر اقلام عملیاتی</td>
+<td class="num">۹۳۰</td>
+<td class="num">(۴۶۰)</td>
+</tr>
+<tr>
+<td>سود عملیاتی</td>
+<td class="num">۹٬۲۱۰</td>
+<td class="num">۶٬۵۶۰</td>
+</tr>
+<tr>
+<td>هزینه‌های مالی</td>
+<td class="num">(۱۴۰)</td>
+<td class="num">(۱۶۵)</td>
+</tr>
+<tr>
+<td>سایر درآمدها و هزینه‌های غیرعملیاتی</td>
+<td class="num">(۱٬۳۸۰)</td>
+<td class="num">۹۴۰</td>
+</tr>
+<tr>
+<td>سود خالص قبل از مالیات</td>
+<td class="num">۷٬۶۹۰</td>
+<td class="num">۷٬۳۳۵</td>
+</tr>
+<tr>
+<td>مالیات بر درآمد (۲۵٪)</td>
+<td class="num">(۱٬۹۲۲)</td>
+<td class="num">(۱٬۸۳۴)</td>
+</tr>
+<tr>
+<td>سود خالص</td>
+<td class="num">۵٬۷۶۸</td>
+<td class="num">۵٬۵۰۱</td>
+</tr>
+</tbody>
+</table></div>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>گردش سود (زیان) انباشته (هزار ریال)</th>
+<th class="num">۱۳۹۵</th>
+<th class="num">۱۳۹۴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>سود انباشته ابتدای دوره</td>
+<td class="num">۱۲٬۶۶۰</td>
+<td class="num">۸٬۷۱۰</td>
+</tr>
+<tr>
+<td>سود خالص سال جاری</td>
+<td class="num">۵٬۷۶۸</td>
+<td class="num">۵٬۵۰۱</td>
+</tr>
+<tr>
+<td>سود قابل تخصیص</td>
+<td class="num">۱۸٬۴۲۸</td>
+<td class="num">۱۴٬۲۱۱</td>
+</tr>
+<tr>
+<td>تخصیص سود</td>
+<td class="num">(۱۱٬۰۵۶)</td>
+<td class="num">(۱۰٬۶۵۸)</td>
+</tr>
+<tr>
+<td>سود انباشته پایان سال</td>
+<td class="num">۷٬۳۷۱</td>
+<td class="num">۳٬۵۵۳</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>مبالغ مالیات و تخصیص که اعشار داشتن به نزدیک‌ترین هزار ریال گرد شده‌اند. سود انباشته ابتدای ۱۳۹۵ همون عددیه که کتاب داده (۱۲٬۶۶۰ هزار ریال).</p>
+</blockquote></section>
+<footer>جواب‌ها رو خودم حل کردم و تو کتاب نیست؛ فرض‌ها تو README پوشه آمده.</footer>
+</main></body></html>

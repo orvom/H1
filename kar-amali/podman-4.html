@@ -1,0 +1,3461 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پودمان ۴ · حل کار عملی‌های بستن حساب‌های مالی</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;700;800&display=swap"><style>
+/* Layout: teal cover band, one notebook column; each practical work is a paper card; tables scroll sideways inside the card */
+:root { --bg:#f2f5f7; --paper:#fff; --ink:#16232b; --muted:#5a6b75; --rule:#d8e1e6; --accent:#0b7a78; --accent-soft:#dff1f0; --band:#0f3b3d; --band-ink:#eaf6f5; --marker:#ffe066; --head:#e9f2f3;
+  --f-display:"Lalezar","Vazirmatn",Tahoma,sans-serif; --f-body:"Vazirmatn",Tahoma,"Segoe UI",sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0c1317; --paper:#131e24; --ink:#e4edf1; --muted:#93a6b0; --rule:#26353d; --accent:#45c9c4; --accent-soft:#163332; --band:#0a2a2c; --band-ink:#e4f4f3; --marker:#6b5a12; --head:#1a2a31; color-scheme:dark; } }
+:root[data-theme="dark"] { --bg:#0c1317; --paper:#131e24; --ink:#e4edf1; --muted:#93a6b0; --rule:#26353d; --accent:#45c9c4; --accent-soft:#163332; --band:#0a2a2c; --band-ink:#e4f4f3; --marker:#6b5a12; --head:#1a2a31; color-scheme:dark; }
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.9; }
+.in { max-width:900px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); }
+.hero { background:var(--band); color:var(--band-ink); }
+.hero .in { padding-block:26px 20px; display:flex; flex-direction:column; gap:10px; }
+.hero h1 { font-family:var(--f-display); font-weight:400; font-size:clamp(1.8rem,6vw,2.6rem); line-height:1.35; margin:0; color:#fff; text-wrap:balance; }
+.hero p { margin:0; opacity:.9; max-width:60ch; }
+.eyebrow { font-size:.85rem; opacity:.75; }
+nav.mods, nav.probs { display:flex; flex-wrap:wrap; gap:8px; }
+nav a, nav button { font:inherit; font-size:.9rem; text-decoration:none; color:var(--band-ink); border:1px solid rgba(255,255,255,.4); padding:2px 12px; border-radius:999px; background:transparent; cursor:pointer; }
+nav a:hover, nav button:hover { background:rgba(255,255,255,.14); }
+nav a[aria-current="page"], nav button[aria-pressed="true"] { background:var(--marker); color:#16232b; border-color:var(--marker); font-weight:700; }
+nav.probs a { color:var(--accent); border-color:var(--accent); background:var(--paper); }
+main.in { padding-block:22px 60px; display:flex; flex-direction:column; gap:18px; }
+section.card { background:var(--paper); border:1px solid var(--rule); border-radius:14px; padding:20px; display:flex; flex-direction:column; gap:12px; min-width:0; scroll-margin-top:12px; }
+section.card.intro { background:var(--accent-soft); }
+section.card h2 { font-family:var(--f-display); font-weight:400; font-size:1.5rem; line-height:1.45; margin:0; color:var(--accent); text-wrap:balance; }
+section.card > * { margin:0; }
+p, blockquote { margin:0; }
+blockquote { background:var(--accent-soft); border-inline-start:4px solid var(--accent); padding:8px 14px; border-radius:6px; }
+blockquote p + p { margin-top:6px; }
+.card ul, .card ol { margin:0; padding-inline-start:1.4em; display:flex; flex-direction:column; gap:3px; }
+.scroll { overflow-x:auto; min-width:0; }
+table { border-collapse:collapse; width:100%; font-size:.92rem; font-variant-numeric:tabular-nums; }
+th, td { border-bottom:1px solid var(--rule); padding:5px 9px; text-align:start; vertical-align:top; }
+th { background:var(--head); color:var(--muted); font-size:.84rem; font-weight:700; white-space:nowrap; }
+td.num, th.num { text-align:left; white-space:nowrap; }
+tr:last-child td { border-bottom:0; }
+strong { font-weight:800; }
+sub { font-size:.82rem; color:var(--muted); line-height:1.6; }
+pre { background:var(--bg); border:1px solid var(--rule); border-radius:8px; padding:10px 14px; overflow-x:auto; direction:rtl; font-family:var(--f-body); line-height:1.8; margin:0; }
+code { font-family:var(--f-body); }
+a { color:var(--accent); }
+a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+footer { color:var(--muted); font-size:.85rem; text-align:center; padding-block:10px; }
+</style></head>
+<body>
+<div class="hero"><div class="in">
+<span class="eyebrow">حسابداری تهیه و تنظیم صورت‌های مالی · کد ۲۱۲۲۵۴ · پایه دوازدهم</span>
+<h1>پودمان ۴ · حل کار عملی‌های بستن حساب‌های مالی</h1>
+<nav class="mods" aria-label="پودمان‌ها"><a href="index.html">فهرست</a><a href="podman-1.html">پودمان ۱</a><a href="podman-2.html">پودمان ۲</a><a href="podman-3.html">پودمان ۳</a><a href="podman-4.html" aria-current="page">پودمان ۴</a><a href="podman-5.html">پودمان ۵</a></nav>
+<nav class="probs" aria-label="کار عملی‌ها"><a href="#m4-1">۱</a><a href="#m4-2">۲</a><a href="#m4-3">۳</a><a href="#m4-4">۴</a><a href="#m4-5">۵</a><a href="#m4-6">۶</a><a href="#m4-7">۷</a><a href="#m4-8">۸</a><a href="#m4-9">۹</a><a href="#m4-10">۱۰</a><a href="#m4-11">۱۱</a><a href="#m4-12">۱۲</a><a href="#m4-13">۱۳</a><a href="#m4-14">۱۴</a><a href="#m4-15">۱۵</a><a href="#m4-16">۱۶</a><a href="#m4-17">۱۷</a></nav>
+</div></div>
+<main class="in">
+<section class="card intro">
+<p>کتاب: «حسابداری تهیه و تنظیم صورت‌های مالی» (کد ۲۱۲۲۵۴). ارقام به <strong>ریال</strong>.</p>
+<blockquote>
+<p><strong>خلاصه‌ی روش</strong> (همون ترتیب کتاب):
+۱) بستن درآمدها: درآمدها بدهکار / <strong>خلاصه سود و زیان</strong> بستانکار
+۲) بستن هزینه‌ها: خلاصه سود و زیان بدهکار / هزینه‌ها بستانکار (در ادواری «خرید کالا» و «هزینه حمل خرید» و در دائمی «بهای تمام‌شده کالای فروش‌رفته» هم جزو هزینه‌هاست؛ «برگشت از فروش» و «تخفیفات نقدی فروش» هم بدهکارن)
+۳) اگه مانده‌ی خلاصه سود و زیان <strong>بستانکار</strong> بود (سود): مالیات (۲۵٪) = خلاصه سود و زیان بدهکار / مالیات پرداختنی بستانکار؛ بعد باقی‌مانده رو به <strong>سود و زیان انباشته</strong> منتقل کن. اگه <strong>بدهکار</strong> بود (زیان): مالیات نداره و مستقیم به سود و زیان انباشته می‌ره.
+۴) <strong>تراز آزمایشی اختتامی:</strong> فقط حساب‌های دائمی. ۵) <strong>بستن حساب‌های دائمی:</strong> تراز اختتامی. ۶) <strong>افتتاح:</strong> تراز افتتاحی.
+همه‌ی ترازها با برنامه چک شدن (بدهکار = بستانکار).</p>
+</blockquote>
+
+</section>
+<section class="card" id="m4-1"><h2>کار عملی ۱ · مؤسسه اردستان</h2>
+<p><strong>صورت مسئله:</strong> ترازآزمایشی اصلاح‌شده‌ی ۱۳۹۶/۱۲/۲۹ مؤسسه‌ی اردستان داده شده. بستن حساب‌های موقت، ثبت مالیات (۲۵٪)، بستن خلاصه سود و زیان و انتقال به دفتر کل.</p>
+<p>جمع تراز اصلاح‌شده‌ی کتاب = ۹۸٬۲۱۰٬۰۰۰ (متوازن ✅).</p>
+<p><strong>ثبت‌های بستن حساب‌های موقت:</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>درآمد خدمات فیلم‌برداری</td>
+<td class="num">۲۵٬۴۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>درآمد خدمات تدوین</td>
+<td class="num">۱۶٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۴۱٬۴۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بستانکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۱۶٬۹۱۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حقوق</td>
+<td class="num"></td>
+<td class="num">۶٬۲۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه بیمه</td>
+<td class="num"></td>
+<td class="num">۲٬۷۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه آب و برق</td>
+<td class="num"></td>
+<td class="num">۱٬۷۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه عوارض و نوسازی</td>
+<td class="num"></td>
+<td class="num">۱٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه تبلیغات</td>
+<td class="num"></td>
+<td class="num">۱٬۶۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه ملزومات</td>
+<td class="num"></td>
+<td class="num">۳۱۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک تجهیزات</td>
+<td class="num"></td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک ساختمان</td>
+<td class="num"></td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بدهکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۶٬۱۲۲٬۵۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۶٬۱۲۲٬۵۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>ثبت مالیات عملکرد سال ۱۳۹۶ (25٪ × ۲۴٬۴۹۰٬۰۰۰)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۱۸٬۳۶۷٬۵۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۱۸٬۳۶۷٬۵۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>انتقال مانده بستانکار خلاصه سود و زیان به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>انتقال به دفتر کل:</strong> مانده‌ی حساب‌های موقت قبل و بعد از بستن:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب موقت</th>
+<th class="num">مانده قبل از بستن</th>
+<th>ماهیت</th>
+<th class="num">مانده بعد از بستن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمد خدمات فیلم‌برداری</td>
+<td class="num">۲۵٬۴۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>درآمد خدمات تدوین</td>
+<td class="num">۱۶٬۰۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حقوق</td>
+<td class="num">۶٬۲۵۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه بیمه</td>
+<td class="num">۲٬۷۵۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه آب و برق</td>
+<td class="num">۱٬۷۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه عوارض و نوسازی</td>
+<td class="num">۱٬۳۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه تبلیغات</td>
+<td class="num">۱٬۶۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه ملزومات</td>
+<td class="num">۳۱۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک تجهیزات</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک ساختمان</td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۱۶٬۹۱۰٬۰۰۰</td>
+<td>بستن درآمدها: ۴۱٬۴۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>ثبت مالیات: ۶٬۱۲۲٬۵۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td>انتقال به سود و زیان انباشته: ۱۸٬۳۶۷٬۵۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>مالیات پرداختنی</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>مانده اول دوره: ۶۰۰٬۰۰۰</td>
+<td>مالیات عملکرد: ۶٬۱۲۲٬۵۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۵٬۵۲۲٬۵۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>مانده اول دوره: ۸۱۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>سود خالص سال: ۱۸٬۳۶۷٬۵۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۱۹٬۱۷۷٬۵۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> سود خالص قبل از مالیات ۲۴٬۴۹۰٬۰۰۰ ← مالیات ۶٬۱۲۲٬۵۰۰ ← سود خالص ۱۸٬۳۶۷٬۵۰۰؛ مانده‌ی سود و زیان انباشته بعد از بستن = <strong>۱۹٬۱۷۷٬۵۰۰</strong> بستانکار.</p>
+<blockquote>
+<p>مالیات پرداختنی از قبل ۶۰۰٬۰۰۰ مانده داره؛ با مالیات امسال (۶٬۱۲۲٬۵۰۰) مانده‌اش ۶٬۷۲۲٬۵۰۰ می‌شه.</p>
+</blockquote>
+
+</section>
+<section class="card" id="m4-2"><h2>کار عملی ۲ · بازرگانی آبی</h2>
+<p><strong>صورت مسئله:</strong> ترازآزمایشی اصلاح‌شده‌ی ۱۳۹۶/۱۲/۲۹ بازرگانی آبی (سیستم ادواری؛ مانده‌ی ۱٬۲۰۰٬۰۰۰ بستانکار «خلاصه سود و زیان» از تعدیل موجودی کالا مونده). ثبت بستن حساب‌های موقت و انتقال به دفتر کل.</p>
+<p><strong>نکته:</strong> تو این تراز «خلاصه سود و زیان ۱٬۲۰۰٬۰۰۰ بستانکار» از قبل هست (اثر تعدیل موجودی کالا: ۳٬۰۰۰٬۰۰۰ پایان − ۱٬۸۰۰٬۰۰۰ اول). پس باید با بقیه‌ی درآمدها و هزینه‌ها ترکیب بشه.</p>
+<p>جمع تراز اصلاح‌شده‌ی کتاب = ۹۵٬۹۹۰٬۰۰۰ (متوازن ✅).</p>
+<p><strong>ثبت‌های بستن حساب‌های موقت:</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>درآمد فروش کالا</td>
+<td class="num">۶۸٬۷۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>برگشت از خرید و تخفیفات</td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>تخفیفات نقدی خرید</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۷۳٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بستانکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۷۴٬۶۴۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;برگشت از فروش و تخفیفات</td>
+<td class="num"></td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تخفیفات نقدی فروش</td>
+<td class="num"></td>
+<td class="num">۱٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خرید کالا</td>
+<td class="num"></td>
+<td class="num">۴۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حمل کالای خریداری‌شده</td>
+<td class="num"></td>
+<td class="num">۸٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حقوق</td>
+<td class="num"></td>
+<td class="num">۶٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک اثاثه</td>
+<td class="num"></td>
+<td class="num">۱۹۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه ملزومات</td>
+<td class="num"></td>
+<td class="num">۲٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه تبلیغات</td>
+<td class="num"></td>
+<td class="num">۳٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه برق</td>
+<td class="num"></td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر هزینه‌ها</td>
+<td class="num"></td>
+<td class="num">۴٬۲۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بدهکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>سود و زیان انباشته</td>
+<td class="num">۲۴۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۲۴۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>زیان خالص ← مالیات ندارد؛ انتقال مانده بدهکار خلاصه سود و زیان به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>انتقال به دفتر کل:</strong> مانده‌ی حساب‌های موقت قبل و بعد از بستن:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب موقت</th>
+<th class="num">مانده قبل از بستن</th>
+<th>ماهیت</th>
+<th class="num">مانده بعد از بستن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمد فروش کالا</td>
+<td class="num">۶۸٬۷۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>تخفیفات نقدی فروش</td>
+<td class="num">۱٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>خرید کالا</td>
+<td class="num">۴۵٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حمل کالای خریداری‌شده</td>
+<td class="num">۸٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>برگشت از خرید و تخفیفات</td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>تخفیفات نقدی خرید</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حقوق</td>
+<td class="num">۶٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک اثاثه</td>
+<td class="num">۱۹۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه ملزومات</td>
+<td class="num">۲٬۲۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه تبلیغات</td>
+<td class="num">۳٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه برق</td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>سایر هزینه‌ها</td>
+<td class="num">۴٬۲۵۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۷۴٬۶۴۰٬۰۰۰</td>
+<td>مانده قبلی (تعدیل موجودی): ۱٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>بستن درآمدها: ۷۳٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>انتقال زیان به سود و زیان انباشته: ۲۴۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>زیان خالص سال: ۲۴۰٬۰۰۰</td>
+<td>مانده اول دوره: ۶۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۳۶۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> <strong>زیان خالص ۲۴۰٬۰۰۰</strong> (مالیات ثبت نمی‌شه)؛ مانده‌ی سود و زیان انباشته بعد از بستن = <strong>۳۶۰٬۰۰۰</strong> بستانکار.</p>
+
+</section>
+<section class="card" id="m4-3"><h2>کار عملی ۳ · بازرگانی قرمز</h2>
+<p><strong>صورت مسئله:</strong> مانده‌ی بخشی از حساب‌های بازرگانی قرمز (فروش و تعمیر تلفن همراه، سیستم ادواری) پس از اصلاحات داده شده. بستن حساب‌های موقت، مالیات (۲۵٪)، بستن خلاصه سود و زیان و انتقال به دفتر کل.</p>
+<p>«پیش‌پرداخت خرید»، «موجودی کالا»، «پیش‌دریافت فروش» و «سرمایه» دائمی‌ان و بسته نمی‌شن. «خلاصه سود و زیان ۲٬۰۰۰٬۰۰۰ بستانکار» از تعدیل موجودیه.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>تخفیفات نقدی خرید</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>درآمد فروش کالا</td>
+<td class="num">۴۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>درآمد تعمیرات</td>
+<td class="num">۱۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۶۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بستانکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۵۱٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حمل کالای خریداری‌شده</td>
+<td class="num"></td>
+<td class="num">۱٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه اجاره</td>
+<td class="num"></td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه بیمه</td>
+<td class="num"></td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;برگشت از فروش و تخفیفات</td>
+<td class="num"></td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خرید کالا</td>
+<td class="num"></td>
+<td class="num">۳۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حقوق</td>
+<td class="num"></td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بدهکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۳٬۱۷۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۳٬۱۷۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>ثبت مالیات عملکرد سال ۱۳۹۶ (25٪ × ۱۲٬۷۰۰٬۰۰۰)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۹٬۵۲۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۹٬۵۲۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>انتقال مانده بستانکار خلاصه سود و زیان به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب موقت</th>
+<th class="num">مانده قبل از بستن</th>
+<th>ماهیت</th>
+<th class="num">مانده بعد از بستن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>تخفیفات نقدی خرید</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حمل کالای خریداری‌شده</td>
+<td class="num">۱٬۳۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه اجاره</td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه بیمه</td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>درآمد فروش کالا</td>
+<td class="num">۴۵٬۰۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>درآمد تعمیرات</td>
+<td class="num">۱۵٬۰۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>خرید کالا</td>
+<td class="num">۳۵٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حقوق</td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۵۱٬۳۰۰٬۰۰۰</td>
+<td>مانده قبلی (تعدیل موجودی): ۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>ثبت مالیات: ۳٬۱۷۵٬۰۰۰</td>
+<td>بستن درآمدها: ۶۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>انتقال به سود و زیان انباشته: ۹٬۵۲۵٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>مالیات پرداختنی</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>مالیات عملکرد: ۳٬۱۷۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۳٬۱۷۵٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>سود خالص سال: ۹٬۵۲۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۹٬۵۲۵٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> سود قبل از مالیات ۱۲٬۷۰۰٬۰۰۰ ← مالیات ۳٬۱۷۵٬۰۰۰ ← سود خالص <strong>۹٬۵۲۵٬۰۰۰</strong> به سود و زیان انباشته می‌ره.</p>
+
+</section>
+<section class="card" id="m4-4"><h2>کار عملی ۴ · تغییر سود و زیان انباشته</h2>
+<p><strong>صورت مسئله:</strong> فروش خالص ۱۵٬۰۰۰٬۰۰۰ · تخفیفات نقدی فروش ۵۰۰٬۰۰۰ · بهای کالای آماده برای فروش ۸٬۰۰۰٬۰۰۰ · موجودی اول ۲٬۰۰۰٬۰۰۰ · موجودی پایان ۴٬۰۰۰٬۰۰۰ · حمل خرید ۱٬۰۰۰٬۰۰۰ · هزینه‌های عملیاتی ۲٬۰۰۰٬۰۰۰ · خالص درآمد و هزینه‌ی غیرعملیاتی ۵۰۰٬۰۰۰. مانده‌ی اول سود و زیان انباشته ۱٬۲۰۰٬۰۰۰ بستانکار. تغییر آن پس از بستن حساب‌های موقت و تعدیل موجودی چقدره؟ (مالیات نداریم)</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>مرحله</th>
+<th>محاسبه</th>
+<th class="num">مبلغ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>فروش خالص</td>
+<td>(تخفیفات نقدی فروش قبلاً کم شده؛ فقط حواس‌پرتیه)</td>
+<td class="num">۱۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بهای کالای فروش‌رفته</td>
+<td>آماده برای فروش ۸٬۰۰۰٬۰۰۰ − موجودی پایان ۴٬۰۰۰٬۰۰۰ (حمل خرید و موجودی اول از قبل تو آماده برای فروش هستن)</td>
+<td class="num">(۴٬۰۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سود ناخالص</td>
+<td>۱۵٬۰۰۰٬۰۰۰ − ۴٬۰۰۰٬۰۰۰</td>
+<td class="num">۱۱٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>هزینه‌های عملیاتی</td>
+<td></td>
+<td class="num">(۲٬۰۰۰٬۰۰۰)</td>
+</tr>
+<tr>
+<td>سود عملیاتی</td>
+<td></td>
+<td class="num">۹٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>خالص درآمد و هزینه‌ی غیرعملیاتی</td>
+<td>(درآمد فرض شد)</td>
+<td class="num">۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>سود خالص = خلاصه سود و زیان</strong></td>
+<td></td>
+<td class="num"><strong>۹٬۵۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جواب:</strong> سود و زیان انباشته به‌اندازه‌ی <strong>۹٬۵۰۰٬۰۰۰ ریال افزایش</strong> می‌یابد و از ۱٬۲۰۰٬۰۰۰ به <strong>۱۰٬۷۰۰٬۰۰۰</strong> بستانکار می‌رسه.</p>
+<blockquote>
+<p>فرض: «خالص درآمدها و هزینه‌های غیرعملیاتی» یعنی خالصِ درآمد (مثبت).</p>
+</blockquote>
+
+</section>
+<section class="card" id="m4-5"><h2>کار عملی ۵ · بازرگانی چادگان (سیستم دائمی)</h2>
+<p><strong>صورت مسئله:</strong> مانده‌ی بخشی از حساب‌ها: درآمد خدمات ۵٬۰۰۰٬۰۰۰ · فروش کالا ۴۵٬۰۰۰٬۰۰۰ · بهای تمام‌شده کالای فروش‌رفته ۳۰٬۰۰۰٬۰۰۰ · حقوق ۱۰٬۰۰۰٬۰۰۰ · اجاره ۸٬۰۰۰٬۰۰۰ · ملزومات ۱٬۰۰۰٬۰۰۰ · استهلاک اثاثه ۳٬۵۰۰٬۰۰۰ (+ سرمایه، موجودی کالا و پیش‌دریافت). ثبت بستن حساب‌های موقت و انتقال به دفتر کل.</p>
+<p>چون سیستم <strong>دائمیه</strong>، «بهای تمام‌شده کالای فروش‌رفته» خودش یه حساب موقت بدهکاره و موجودی کالا (۱۴٬۰۰۰٬۰۰۰)، سرمایه و پیش‌دریافت (۴٬۰۰۰٬۰۰۰) دائمی‌ان و بسته نمی‌شن.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>درآمد ارائه خدمات</td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>درآمد فروش کالا</td>
+<td class="num">۴۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۵۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بستانکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۵۲٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num"></td>
+<td class="num">۳۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حقوق</td>
+<td class="num"></td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه اجاره</td>
+<td class="num"></td>
+<td class="num">۸٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه ملزومات</td>
+<td class="num"></td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک اثاثه</td>
+<td class="num"></td>
+<td class="num">۳٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بدهکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>سود و زیان انباشته</td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>زیان خالص ← مالیات ندارد؛ انتقال مانده بدهکار خلاصه سود و زیان به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب موقت</th>
+<th class="num">مانده قبل از بستن</th>
+<th>ماهیت</th>
+<th class="num">مانده بعد از بستن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمد ارائه خدمات</td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>درآمد فروش کالا</td>
+<td class="num">۴۵٬۰۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num">۳۰٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حقوق</td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه اجاره</td>
+<td class="num">۸٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه ملزومات</td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک اثاثه</td>
+<td class="num">۳٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۵۲٬۵۰۰٬۰۰۰</td>
+<td>بستن درآمدها: ۵۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>انتقال زیان به سود و زیان انباشته: ۲٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>زیان خالص سال: ۲٬۵۰۰٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>مانده: ۲٬۵۰۰٬۰۰۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> هزینه‌ها (۵۲٬۵۰۰٬۰۰۰) از درآمدها (۵۰٬۰۰۰٬۰۰۰) بیشتره ← <strong>زیان خالص ۲٬۵۰۰٬۰۰۰</strong> ← مالیات نداره و زیان به سود و زیان انباشته منتقل می‌شه (بدهکار).</p>
+
+</section>
+<section class="card" id="m4-6"><h2>کار عملی ۶ · بازرگانی گلچین</h2>
+<p><strong>صورت مسئله:</strong> تراز آزمایشی اصلاح‌شده‌ی ۱۳۹۶/۱۲/۲۹ بازرگانی گلچین (سیستم دائمی). بستن حساب‌های موقت، مالیات (۲۵٪)، بستن خلاصه سود و زیان و انتقال به دفتر کل.</p>
+<p>جمع تراز اصلاح‌شده‌ی کتاب = ۱۲۶٬۲۰۰٬۰۰۰ (متوازن ✅).</p>
+<p><strong>ثبت‌های بستن حساب‌های موقت:</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>درآمد فروش کالا</td>
+<td class="num">۷۰٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۷۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بستانکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۶۷٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تخفیفات نقدی فروش</td>
+<td class="num"></td>
+<td class="num">۱٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;برگشت از فروش و تخفیفات</td>
+<td class="num"></td>
+<td class="num">۲٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num"></td>
+<td class="num">۴۸٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حقوق</td>
+<td class="num"></td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک اثاثه</td>
+<td class="num"></td>
+<td class="num">۱٬۶۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه ملزومات</td>
+<td class="num"></td>
+<td class="num">۸۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه اجاره</td>
+<td class="num"></td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر هزینه‌ها</td>
+<td class="num"></td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بدهکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۷۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۷۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>ثبت مالیات عملکرد سال ۱۳۹۶ (25٪ × ۳٬۰۰۰٬۰۰۰)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۲٬۲۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۲٬۲۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>انتقال مانده بستانکار خلاصه سود و زیان به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>انتقال به دفتر کل:</strong> مانده‌ی حساب‌های موقت قبل و بعد از بستن:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب موقت</th>
+<th class="num">مانده قبل از بستن</th>
+<th>ماهیت</th>
+<th class="num">مانده بعد از بستن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمد فروش کالا</td>
+<td class="num">۷۰٬۰۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>تخفیفات نقدی فروش</td>
+<td class="num">۱٬۳۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">۲٬۳۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num">۴۸٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حقوق</td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک اثاثه</td>
+<td class="num">۱٬۶۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه ملزومات</td>
+<td class="num">۸۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه اجاره</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>سایر هزینه‌ها</td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۶۷٬۰۰۰٬۰۰۰</td>
+<td>بستن درآمدها: ۷۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>ثبت مالیات: ۷۵۰٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td>انتقال به سود و زیان انباشته: ۲٬۲۵۰٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>مالیات پرداختنی</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>مالیات عملکرد: ۷۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۷۵۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>مانده اول دوره: ۴٬۹۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>سود خالص سال: ۲٬۲۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۷٬۲۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> سود خالص قبل از مالیات ۳٬۰۰۰٬۰۰۰ ← مالیات ۷۵۰٬۰۰۰ ← سود خالص ۲٬۲۵۰٬۰۰۰؛ مانده‌ی سود و زیان انباشته بعد از بستن = <strong>۷٬۲۰۰٬۰۰۰</strong> بستانکار.</p>
+
+</section>
+<section class="card" id="m4-7"><h2>کار عملی ۷ · تکمیل فرایند بستن (با جهت‌نما)</h2>
+<p><strong>صورت مسئله:</strong> حساب‌های درآمد فروش کالا ۱۰٬۰۰۰٬۰۰۰ · برگشت از فروش ۵۰۰٬۰۰۰ · درآمد ارائه خدمات ۵٬۰۰۰٬۰۰۰ · هزینه اجاره ۴٬۰۰۰٬۰۰۰ · هزینه استهلاک ۲۰۰٬۰۰۰ · بهای تمام‌شده کالای فروش‌رفته ۷٬۰۰۰٬۰۰۰ به‌همراه حساب‌های خلاصه سود و زیان و سود و زیان انباشته؛ فرایند بستن کامل شود (مالیات نداریم).</p>
+<p>ترتیب جهت‌نماها (فلش‌ها):</p>
+<pre><code>درآمد فروش کالا (۱۰٬۰۰۰٬۰۰۰) ──┐
+درآمد ارائه خدمات (۵٬۰۰۰٬۰۰۰) ──┴──► خلاصه سود و زیان (بستانکار ۱۵٬۰۰۰٬۰۰۰)
+برگشت از فروش (۵۰۰٬۰۰۰) ───────┐
+هزینه اجاره (۴٬۰۰۰٬۰۰۰) ───────┤
+هزینه استهلاک (۲۰۰٬۰۰۰) ───────┼──► خلاصه سود و زیان (بدهکار ۱۱٬۷۰۰٬۰۰۰)
+بهای کالای فروش‌رفته (۷٬۰۰۰٬۰۰۰) ┘
+مانده‌ی خلاصه سود و زیان (۳٬۳۰۰٬۰۰۰ بستانکار) ──► سود و زیان انباشته (بستانکار)
+</code></pre>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۲/۲۹</td>
+<td>درآمد فروش کالا</td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>درآمد ارائه خدمات</td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۱۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن درآمدها</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۱۱٬۷۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;برگشت از فروش و تخفیفات</td>
+<td class="num"></td>
+<td class="num">۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه اجاره</td>
+<td class="num"></td>
+<td class="num">۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک</td>
+<td class="num"></td>
+<td class="num">۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num"></td>
+<td class="num">۷٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن هزینه‌ها و حساب‌های کاهنده‌ی درآمد</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۳٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۳٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>انتقال سود به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۱۱٬۷۰۰٬۰۰۰</td>
+<td>بستن درآمدها: ۱۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>انتقال به سود و زیان انباشته: ۳٬۳۰۰٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>سود خالص: ۳٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۳٬۳۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> درآمدها ۱۵٬۰۰۰٬۰۰۰ − هزینه‌ها ۱۱٬۷۰۰٬۰۰۰ = <strong>سود ۳٬۳۰۰٬۰۰۰</strong> که به سود و زیان انباشته می‌ره.</p>
+
+</section>
+<section class="card" id="m4-8"><h2>کار عملی ۸ · تراز آزمایشی اختتامی بازرگانی آبی</h2>
+<p><strong>صورت مسئله:</strong> تراز آزمایشی اختتامی بازرگانی آبی (کار عملی ۲) تهیه شود.</p>
+<p>فقط حساب‌های دائمی. «سود و زیان انباشته» اینجا بعد از انتقال زیان ۲۴۰٬۰۰۰ شده ۶۰۰٬۰۰۰ − ۲۴۰٬۰۰۰ = ۳۶۰٬۰۰۰ بستانکار.</p>
+<p><strong>تراز آزمایشی اختتامی · بازرگانی آبی · ۱۳۹۶/۱۲/۲۹</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>نام حساب</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بانک</td>
+<td class="num">۹٬۹۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>حساب‌های دریافتنی</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سایر حساب‌های دریافتنی</td>
+<td class="num">۴٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی کالا</td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>ملزومات</td>
+<td class="num">۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>اثاثه</td>
+<td class="num">۱٬۹۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>استهلاک انباشته اثاثه</td>
+<td class="num"></td>
+<td class="num">۱۹۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۶٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه</td>
+<td class="num"></td>
+<td class="num">۱۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۳۶۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع</strong></td>
+<td class="num"><strong>۲۱٬۳۵۰٬۰۰۰</strong></td>
+<td class="num"><strong>۲۱٬۳۵۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+<section class="card" id="m4-9"><h2>کار عملی ۹ · تراز آزمایشی اختتامی بازرگانی گلچین</h2>
+<p><strong>صورت مسئله:</strong> تراز آزمایشی اختتامی بازرگانی گلچین (کار عملی ۶) تهیه شود.</p>
+<p>«مالیات پرداختنی ۷۵۰٬۰۰۰» تازه ثبت شده و «سود و زیان انباشته» = ۴٬۹۵۰٬۰۰۰ + ۲٬۲۵۰٬۰۰۰ = ۷٬۲۰۰٬۰۰۰.</p>
+<p><strong>تراز آزمایشی اختتامی · بازرگانی گلچین · ۱۳۹۶/۱۲/۲۹</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>نام حساب</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بانک</td>
+<td class="num">۲۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>حساب‌های دریافتنی</td>
+<td class="num">۳٬۷۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سایر حساب‌های دریافتنی</td>
+<td class="num">۴٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی کالا</td>
+<td class="num">۱۴٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>ملزومات</td>
+<td class="num">۴٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>اثاثه</td>
+<td class="num">۸٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>استهلاک انباشته اثاثه</td>
+<td class="num"></td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۲٬۰۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۶٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه</td>
+<td class="num"></td>
+<td class="num">۴۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۷٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۷۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع</strong></td>
+<td class="num"><strong>۵۹٬۲۰۰٬۰۰۰</strong></td>
+<td class="num"><strong>۵۹٬۲۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+<section class="card" id="m4-10"><h2>کار عملی ۱۰ · مؤسسه تبلیغاتی گلپایگان</h2>
+<p><strong>صورت مسئله:</strong> با توجه به تراز اصلاح‌شده‌ی مؤسسه‌ی تبلیغاتی گلپایگان، حساب‌های موقت بسته و تراز آزمایشی اختتامی تهیه شود (مالیات ۲۵٪).</p>
+<p>جمع تراز اصلاح‌شده‌ی کتاب = ۳۸۶٬۴۰۰٬۰۰۰ (متوازن ✅).</p>
+<p><strong>ثبت‌های بستن حساب‌های موقت:</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>درآمد ارائه خدمات</td>
+<td class="num">۲۰۸٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۲۰۸٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بستانکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۱۷۰٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه اجاره</td>
+<td class="num"></td>
+<td class="num">۱۱۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه آگهی و تبلیغات</td>
+<td class="num"></td>
+<td class="num">۱۸٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه برق</td>
+<td class="num"></td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حقوق</td>
+<td class="num"></td>
+<td class="num">۱۶٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک اثاثه</td>
+<td class="num"></td>
+<td class="num">۴٬۸۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک ساختمان</td>
+<td class="num"></td>
+<td class="num">۶٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه ملزومات</td>
+<td class="num"></td>
+<td class="num">۲٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر هزینه‌ها</td>
+<td class="num"></td>
+<td class="num">۶٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بدهکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۹٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۹٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>ثبت مالیات عملکرد سال ۱۳۹۶ (25٪ × ۳۸٬۰۰۰٬۰۰۰)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۲۸٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۲۸٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>انتقال مانده بستانکار خلاصه سود و زیان به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>انتقال به دفتر کل:</strong> مانده‌ی حساب‌های موقت قبل و بعد از بستن:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب موقت</th>
+<th class="num">مانده قبل از بستن</th>
+<th>ماهیت</th>
+<th class="num">مانده بعد از بستن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمد ارائه خدمات</td>
+<td class="num">۲۰۸٬۲۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه اجاره</td>
+<td class="num">۱۱۴٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه آگهی و تبلیغات</td>
+<td class="num">۱۸٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه برق</td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حقوق</td>
+<td class="num">۱۶٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک اثاثه</td>
+<td class="num">۴٬۸۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک ساختمان</td>
+<td class="num">۶٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه ملزومات</td>
+<td class="num">۲٬۲۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>سایر هزینه‌ها</td>
+<td class="num">۶٬۲۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۱۷۰٬۲۰۰٬۰۰۰</td>
+<td>بستن درآمدها: ۲۰۸٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>ثبت مالیات: ۹٬۵۰۰٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td>انتقال به سود و زیان انباشته: ۲۸٬۵۰۰٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>مالیات پرداختنی</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>مالیات عملکرد: ۹٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۹٬۵۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>مانده اول دوره: ۱۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>سود خالص سال: ۲۸٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۴۳٬۵۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> سود خالص قبل از مالیات ۳۸٬۰۰۰٬۰۰۰ ← مالیات ۹٬۵۰۰٬۰۰۰ ← سود خالص ۲۸٬۵۰۰٬۰۰۰؛ مانده‌ی سود و زیان انباشته بعد از بستن = <strong>۴۳٬۵۰۰٬۰۰۰</strong> بستانکار.</p>
+<p><strong>تراز آزمایشی اختتامی · مؤسسه گلپایگان · ۱۳۹۶/۱۲/۲۹</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>نام حساب</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بانک</td>
+<td class="num">۲۰٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>حساب‌های دریافتنی</td>
+<td class="num">۳۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سایر حساب‌های دریافتنی</td>
+<td class="num">۶٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>اسناد دریافتنی</td>
+<td class="num">۳۳٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>ملزومات</td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>پیش‌پرداخت‌ها</td>
+<td class="num">۳٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>اثاثه</td>
+<td class="num">۲۴٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>استهلاک انباشته اثاثه</td>
+<td class="num"></td>
+<td class="num">۷٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>ساختمان</td>
+<td class="num">۹۰٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>استهلاک انباشته ساختمان</td>
+<td class="num"></td>
+<td class="num">۱۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۱۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۱۸٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>اسناد پرداختنی</td>
+<td class="num"></td>
+<td class="num">۶۶٬۷۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه</td>
+<td class="num"></td>
+<td class="num">۴۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۴۳٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۹٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع</strong></td>
+<td class="num"><strong>۲۱۶٬۲۰۰٬۰۰۰</strong></td>
+<td class="num"><strong>۲۱۶٬۲۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+<section class="card" id="m4-11"><h2>کار عملی ۱۱ · بستن حساب‌های دائمی بازرگانی آبی</h2>
+<p><strong>صورت مسئله:</strong> با اطلاعات بازرگانی آبی و تراز اختتامی کار عملی ۸، ثبت‌های بستن حساب‌های دائمی انجام شود.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>تراز اختتامی</td>
+<td class="num">۲۱٬۳۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;بانک</td>
+<td class="num"></td>
+<td class="num">۹٬۹۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;حساب‌های دریافتنی</td>
+<td class="num"></td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر حساب‌های دریافتنی</td>
+<td class="num"></td>
+<td class="num">۴٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;موجودی کالا</td>
+<td class="num"></td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;ملزومات</td>
+<td class="num"></td>
+<td class="num">۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;اثاثه</td>
+<td class="num"></td>
+<td class="num">۱٬۹۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های دائمی با مانده بدهکار (دارایی‌ها)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>استهلاک انباشته اثاثه</td>
+<td class="num">۱۹۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>حساب‌های پرداختنی</td>
+<td class="num">۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num">۶٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سرمایه</td>
+<td class="num">۱۴٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سود و زیان انباشته</td>
+<td class="num">۳۶۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تراز اختتامی</td>
+<td class="num"></td>
+<td class="num">۲۱٬۳۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های دائمی با مانده بستانکار (بدهی‌ها، سرمایه، استهلاک‌های انباشته)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p>جمع گردش بدهکار «تراز اختتامی» = جمع ستون بدهکار تراز اختتامی = ۲۱٬۳۵۰٬۰۰۰؛ بعد از دو ثبت، مانده‌ی «تراز اختتامی» صفره ✅.</p>
+
+</section>
+<section class="card" id="m4-12"><h2>کار عملی ۱۲ · بستن حساب‌های دائمی بازرگانی گلچین</h2>
+<p><strong>صورت مسئله:</strong> با اطلاعات بازرگانی گلچین و تراز اختتامی کار عملی ۹، ثبت‌های بستن حساب‌های دائمی انجام شود.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>تراز اختتامی</td>
+<td class="num">۵۹٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;بانک</td>
+<td class="num"></td>
+<td class="num">۲۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;حساب‌های دریافتنی</td>
+<td class="num"></td>
+<td class="num">۳٬۷۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر حساب‌های دریافتنی</td>
+<td class="num"></td>
+<td class="num">۴٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;موجودی کالا</td>
+<td class="num"></td>
+<td class="num">۱۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;ملزومات</td>
+<td class="num"></td>
+<td class="num">۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;اثاثه</td>
+<td class="num"></td>
+<td class="num">۸٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های دائمی با مانده بدهکار (دارایی‌ها)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>استهلاک انباشته اثاثه</td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>حساب‌های پرداختنی</td>
+<td class="num">۲٬۰۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num">۶٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سرمایه</td>
+<td class="num">۴۰٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سود و زیان انباشته</td>
+<td class="num">۷٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>مالیات پرداختنی</td>
+<td class="num">۷۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تراز اختتامی</td>
+<td class="num"></td>
+<td class="num">۵۹٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های دائمی با مانده بستانکار (بدهی‌ها، سرمایه، استهلاک‌های انباشته)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p>جمع طرفین = ۵۹٬۲۰۰٬۰۰۰ ✅</p>
+
+</section>
+<section class="card" id="m4-13"><h2>کار عملی ۱۳ · مؤسسه چهارباغ (سه بخش: موقت، اختتامی، دائمی)</h2>
+<p><strong>صورت مسئله:</strong> تراز اصلاح‌شده‌ی چهارباغ داده شده. ۱) بستن حساب‌های موقت ۲) تراز آزمایشی اختتامی ۳) بستن حساب‌های دائمی.</p>
+<p>جمع تراز اصلاح‌شده‌ی کتاب = ۱۰۵٬۶۲۵٬۰۰۰ (متوازن ✅).</p>
+<p><strong>ثبت‌های بستن حساب‌های موقت:</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>درآمد ارائه خدمات</td>
+<td class="num">۴۰٬۷۶۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۴۰٬۷۶۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بستانکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۴۲٬۷۷۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حقوق</td>
+<td class="num"></td>
+<td class="num">۳۱٬۰۷۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه اجاره</td>
+<td class="num"></td>
+<td class="num">۳٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه برق</td>
+<td class="num"></td>
+<td class="num">۲٬۹۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک اثاثه</td>
+<td class="num"></td>
+<td class="num">۲٬۶۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه ملزومات</td>
+<td class="num"></td>
+<td class="num">۶۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر هزینه‌ها</td>
+<td class="num"></td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بدهکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>سود و زیان انباشته</td>
+<td class="num">۲٬۰۱۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۲٬۰۱۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>زیان خالص ← مالیات ندارد؛ انتقال مانده بدهکار خلاصه سود و زیان به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>انتقال به دفتر کل:</strong> مانده‌ی حساب‌های موقت قبل و بعد از بستن:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب موقت</th>
+<th class="num">مانده قبل از بستن</th>
+<th>ماهیت</th>
+<th class="num">مانده بعد از بستن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمد ارائه خدمات</td>
+<td class="num">۴۰٬۷۶۵٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حقوق</td>
+<td class="num">۳۱٬۰۷۵٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه اجاره</td>
+<td class="num">۳٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه برق</td>
+<td class="num">۲٬۹۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک اثاثه</td>
+<td class="num">۲٬۶۵۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه ملزومات</td>
+<td class="num">۶۵۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>سایر هزینه‌ها</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۴۲٬۷۷۵٬۰۰۰</td>
+<td>بستن درآمدها: ۴۰٬۷۶۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>انتقال زیان به سود و زیان انباشته: ۲٬۰۱۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>زیان خالص سال: ۲٬۰۱۰٬۰۰۰</td>
+<td>مانده اول دوره: ۱٬۸۴۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>مانده: ۱۷۰٬۰۰۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> <strong>زیان خالص ۲٬۰۱۰٬۰۰۰</strong> (مالیات ثبت نمی‌شه)؛ مانده‌ی سود و زیان انباشته بعد از بستن = <strong>−۱۷۰٬۰۰۰</strong> بدهکار (زیان انباشته).</p>
+<p><strong>۲) تراز آزمایشی اختتامی · مؤسسه چهارباغ · ۱۳۹۶/۱۲/۲۹</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>نام حساب</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بانک</td>
+<td class="num">۳٬۰۸۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تنخواه‌گردان</td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>حساب‌های دریافتنی</td>
+<td class="num">۲۱٬۵۷۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سایر حساب‌های دریافتنی</td>
+<td class="num">۹۸۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>ملزومات</td>
+<td class="num">۱٬۹۶۵٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>پیش‌پرداخت اجاره</td>
+<td class="num">۱۳٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>نرم‌افزار رایانه‌ای</td>
+<td class="num">۶٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>اثاثه</td>
+<td class="num">۱۳٬۲۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>استهلاک انباشته اثاثه</td>
+<td class="num"></td>
+<td class="num">۱۰٬۶۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۱۹٬۵۷۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۳٬۶۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>پیش‌دریافت درآمد</td>
+<td class="num"></td>
+<td class="num">۱٬۷۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>اسناد پرداختنی بلندمدت</td>
+<td class="num"></td>
+<td class="num">۱۷٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه</td>
+<td class="num"></td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سود و زیان انباشته</td>
+<td class="num">۱۷۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td><strong>جمع</strong></td>
+<td class="num"><strong>۶۳٬۰۲۰٬۰۰۰</strong></td>
+<td class="num"><strong>۶۳٬۰۲۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>سود و زیان انباشته بعد از زیان ۲٬۰۱۰٬۰۰۰ (۱٬۸۴۰٬۰۰۰ − ۲٬۰۱۰٬۰۰۰) شد <strong>۱۷۰٬۰۰۰ بدهکار</strong> (زیان انباشته).</p>
+<p><strong>۳) بستن حساب‌های دائمی:</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>تراز اختتامی</td>
+<td class="num">۶۳٬۰۲۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;بانک</td>
+<td class="num"></td>
+<td class="num">۳٬۰۸۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تنخواه‌گردان</td>
+<td class="num"></td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;حساب‌های دریافتنی</td>
+<td class="num"></td>
+<td class="num">۲۱٬۵۷۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر حساب‌های دریافتنی</td>
+<td class="num"></td>
+<td class="num">۹۸۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;ملزومات</td>
+<td class="num"></td>
+<td class="num">۱٬۹۶۵٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;پیش‌پرداخت اجاره</td>
+<td class="num"></td>
+<td class="num">۱۳٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;نرم‌افزار رایانه‌ای</td>
+<td class="num"></td>
+<td class="num">۶٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;اثاثه</td>
+<td class="num"></td>
+<td class="num">۱۳٬۲۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۱۷۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های دائمی با مانده بدهکار (دارایی‌ها)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>استهلاک انباشته اثاثه</td>
+<td class="num">۱۰٬۶۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>حساب‌های پرداختنی</td>
+<td class="num">۱۹٬۵۷۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num">۳٬۶۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>پیش‌دریافت درآمد</td>
+<td class="num">۱٬۷۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>اسناد پرداختنی بلندمدت</td>
+<td class="num">۱۷٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سرمایه</td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تراز اختتامی</td>
+<td class="num"></td>
+<td class="num">۶۳٬۰۲۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های دائمی با مانده بستانکار (بدهی‌ها، سرمایه، استهلاک‌های انباشته)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+<section class="card" id="m4-14"><h2>کار عملی ۱۴ · بازرگانی چهل‌ستون (سه بخش: موقت، اختتامی، دائمی)</h2>
+<p><strong>صورت مسئله:</strong> تراز اصلاح‌شده‌ی چهل‌ستون (سیستم دائمی، مالیات ۲۵٪) داده شده. ۱) بستن حساب‌های موقت ۲) تراز اختتامی ۳) بستن حساب‌های دائمی.</p>
+<p>جمع تراز اصلاح‌شده‌ی کتاب = ۱۶۶٬۵۵۰٬۰۰۰ (متوازن ✅).</p>
+<p><strong>ثبت‌های بستن حساب‌های موقت:</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>درآمد فروش کالا</td>
+<td class="num">۱۱۷٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;خلاصه سود و زیان</td>
+<td class="num"></td>
+<td class="num">۱۱۷٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بستانکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۹۸٬۶۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;برگشت از فروش و تخفیفات</td>
+<td class="num"></td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تخفیفات نقدی فروش</td>
+<td class="num"></td>
+<td class="num">۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num"></td>
+<td class="num">۷۵٬۷۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه حقوق</td>
+<td class="num"></td>
+<td class="num">۷٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه اجاره</td>
+<td class="num"></td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه تبلیغات</td>
+<td class="num"></td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه استهلاک</td>
+<td class="num"></td>
+<td class="num">۲٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;هزینه ملزومات</td>
+<td class="num"></td>
+<td class="num">۴۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر هزینه‌ها</td>
+<td class="num"></td>
+<td class="num">۴٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های موقت با مانده بدهکار به خلاصه سود و زیان</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۴٬۶۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۴٬۶۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>ثبت مالیات عملکرد سال ۱۳۹۶ (25٪ × ۱۸٬۶۰۰٬۰۰۰)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>خلاصه سود و زیان</td>
+<td class="num">۱۳٬۹۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۱۳٬۹۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>انتقال مانده بستانکار خلاصه سود و زیان به سود و زیان انباشته</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>انتقال به دفتر کل:</strong> مانده‌ی حساب‌های موقت قبل و بعد از بستن:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب موقت</th>
+<th class="num">مانده قبل از بستن</th>
+<th>ماهیت</th>
+<th class="num">مانده بعد از بستن</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>درآمد فروش کالا</td>
+<td class="num">۱۱۷٬۲۰۰٬۰۰۰</td>
+<td>بستانکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>برگشت از فروش و تخفیفات</td>
+<td class="num">۱٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>تخفیفات نقدی فروش</td>
+<td class="num">۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>بهای تمام‌شده کالای فروش‌رفته</td>
+<td class="num">۷۵٬۷۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه حقوق</td>
+<td class="num">۷٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه اجاره</td>
+<td class="num">۵٬۰۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه تبلیغات</td>
+<td class="num">۲٬۵۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه استهلاک</td>
+<td class="num">۲٬۲۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>هزینه ملزومات</td>
+<td class="num">۴۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>سایر هزینه‌ها</td>
+<td class="num">۴٬۳۰۰٬۰۰۰</td>
+<td>بدهکار</td>
+<td class="num">۰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>خلاصه سود و زیان</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بستن هزینه‌ها: ۹۸٬۶۰۰٬۰۰۰</td>
+<td>بستن درآمدها: ۱۱۷٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>ثبت مالیات: ۴٬۶۵۰٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td>انتقال به سود و زیان انباشته: ۱۳٬۹۵۰٬۰۰۰</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>مانده: ۰</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>مالیات پرداختنی</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>مالیات عملکرد: ۴٬۶۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۴٬۶۵۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>سود و زیان انباشته</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>بدهکار</th>
+<th>بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>مانده اول دوره: ۷٬۳۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>سود خالص سال: ۱۳٬۹۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>مانده: ۲۱٬۳۰۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>نتیجه:</strong> سود خالص قبل از مالیات ۱۸٬۶۰۰٬۰۰۰ ← مالیات ۴٬۶۵۰٬۰۰۰ ← سود خالص ۱۳٬۹۵۰٬۰۰۰؛ مانده‌ی سود و زیان انباشته بعد از بستن = <strong>۲۱٬۳۰۰٬۰۰۰</strong> بستانکار.</p>
+<p><strong>۲) تراز آزمایشی اختتامی · بازرگانی چهل‌ستون · ۱۳۹۶/۱۲/۲۹</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>نام حساب</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بانک</td>
+<td class="num">۱۴٬۹۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>حساب‌های دریافتنی</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سایر حساب‌های دریافتنی</td>
+<td class="num">۷٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی کالا</td>
+<td class="num">۲۸٬۸۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>ملزومات</td>
+<td class="num">۴٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تجهیزات اداری</td>
+<td class="num">۱۱٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>استهلاک انباشته تجهیزات</td>
+<td class="num"></td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۲٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۱۱٬۸۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه</td>
+<td class="num"></td>
+<td class="num">۲۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۲۱٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۴٬۶۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع</strong></td>
+<td class="num"><strong>۶۷٬۹۵۰٬۰۰۰</strong></td>
+<td class="num"><strong>۶۷٬۹۵۰٬۰۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>۳) بستن حساب‌های دائمی:</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>تراز اختتامی</td>
+<td class="num">۶۷٬۹۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;بانک</td>
+<td class="num"></td>
+<td class="num">۱۴٬۹۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;حساب‌های دریافتنی</td>
+<td class="num"></td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر حساب‌های دریافتنی</td>
+<td class="num"></td>
+<td class="num">۷٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;موجودی کالا</td>
+<td class="num"></td>
+<td class="num">۲۸٬۸۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;ملزومات</td>
+<td class="num"></td>
+<td class="num">۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تجهیزات اداری</td>
+<td class="num"></td>
+<td class="num">۱۱٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های دائمی با مانده بدهکار (دارایی‌ها)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۶/۱۲/۲۹</td>
+<td>استهلاک انباشته تجهیزات</td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>حساب‌های پرداختنی</td>
+<td class="num">۲٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سایر حساب‌های پرداختنی</td>
+<td class="num">۱۱٬۸۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سرمایه</td>
+<td class="num">۲۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سود و زیان انباشته</td>
+<td class="num">۲۱٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>مالیات پرداختنی</td>
+<td class="num">۴٬۶۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تراز اختتامی</td>
+<td class="num"></td>
+<td class="num">۶۷٬۹۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>بستن حساب‌های دائمی با مانده بستانکار (بدهی‌ها، سرمایه، استهلاک‌های انباشته)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+<section class="card" id="m4-15"><h2>کار عملی ۱۵ · وام و چک تضمین (آقای دانشور)</h2>
+<p><strong>صورت مسئله:</strong> وامی ۳۰۰٬۰۰۰٬۰۰۰ ریال برای بازرگانی دریافت شده و طبق مقررات معادل ۱۲۵٪ مبلغ وام (چک) به‌عنوان تضمین به بانک تسلیم شده. دریافت وام و تضمین ثبت شود.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>تاریخ دریافت</td>
+<td>بانک</td>
+<td class="num">۳۰۰٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;وام پرداختنی</td>
+<td class="num"></td>
+<td class="num">۳۰۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>دریافت وام ۳۰۰٬۰۰۰٬۰۰۰ ریال</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تاریخ دریافت</td>
+<td>حساب‌های انتظامی ـ ما نزد دیگران</td>
+<td class="num">۳۷۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;طرف حساب‌های انتظامی</td>
+<td class="num"></td>
+<td class="num">۳۷۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>چک تضمین = ۳۰۰٬۰۰۰٬۰۰۰ × ۱۲۵٪ = ۳۷۵٬۰۰۰٬۰۰۰ (اسناد تضمینی ما نزد دیگران)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p>ثبت تضمین «بار مالی» نداره و روی دارایی و بدهی اثر نمی‌ذاره؛ فقط آماریه. آخر دوره با ثبت معکوس بسته و اول دوره‌ی بعد دوباره ایجاد می‌شه.</p>
+
+</section>
+<section class="card" id="m4-16"><h2>کار عملی ۱۶ · افتتاح حساب‌های دائمی بازرگانی آبی</h2>
+<p><strong>صورت مسئله:</strong> با اطلاعات کار عملی ۱۱ و بستن حساب‌ها، حساب‌های دائمی بازرگانی آبی افتتاح شود.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۷/۰۱/۰۱</td>
+<td>بانک</td>
+<td class="num">۹٬۹۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>حساب‌های دریافتنی</td>
+<td class="num">۲٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سایر حساب‌های دریافتنی</td>
+<td class="num">۴٬۳۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>موجودی کالا</td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>ملزومات</td>
+<td class="num">۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>اثاثه</td>
+<td class="num">۱٬۹۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تراز افتتاحی</td>
+<td class="num"></td>
+<td class="num">۲۱٬۳۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>افتتاح حساب‌های دارایی (مانده بدهکار)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۷/۰۱/۰۱</td>
+<td>تراز افتتاحی</td>
+<td class="num">۲۱٬۳۵۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;استهلاک انباشته اثاثه</td>
+<td class="num"></td>
+<td class="num">۱۹۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۶٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سرمایه</td>
+<td class="num"></td>
+<td class="num">۱۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۳۶۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>افتتاح حساب‌های بدهی و حقوق صاحبان سرمایه و استهلاک انباشته (مانده بستانکار)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p>مانده‌ی «تراز افتتاحی» بعد از دو ثبت صفره (جمع هر طرف ۲۱٬۳۵۰٬۰۰۰) ✅</p>
+
+</section>
+<section class="card" id="m4-17"><h2>کار عملی ۱۷ · افتتاح حساب‌های دائمی بازرگانی گلچین</h2>
+<p><strong>صورت مسئله:</strong> با اطلاعات کار عملی ۱۲ و بستن حساب‌ها، حساب‌های دائمی بازرگانی گلچین افتتاح شود.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>تاریخ</th>
+<th>شرح</th>
+<th class="num">بدهکار</th>
+<th class="num">بستانکار</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۷/۰۱/۰۱</td>
+<td>بانک</td>
+<td class="num">۲۵٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>حساب‌های دریافتنی</td>
+<td class="num">۳٬۷۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>سایر حساب‌های دریافتنی</td>
+<td class="num">۴٬۵۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>موجودی کالا</td>
+<td class="num">۱۴٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>ملزومات</td>
+<td class="num">۴٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>اثاثه</td>
+<td class="num">۸٬۰۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;تراز افتتاحی</td>
+<td class="num"></td>
+<td class="num">۵۹٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>افتتاح حساب‌های دارایی (مانده بدهکار)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>۱۳۹۷/۰۱/۰۱</td>
+<td>تراز افتتاحی</td>
+<td class="num">۵۹٬۲۰۰٬۰۰۰</td>
+<td class="num"></td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;استهلاک انباشته اثاثه</td>
+<td class="num"></td>
+<td class="num">۳٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۲٬۰۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سایر حساب‌های پرداختنی</td>
+<td class="num"></td>
+<td class="num">۶٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سرمایه</td>
+<td class="num"></td>
+<td class="num">۴۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;سود و زیان انباشته</td>
+<td class="num"></td>
+<td class="num">۷٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td>&emsp;&emsp;مالیات پرداختنی</td>
+<td class="num"></td>
+<td class="num">۷۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td></td>
+<td><sub>افتتاح حساب‌های بدهی و حقوق صاحبان سرمایه و استهلاک انباشته (مانده بستانکار)</sub></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+</tbody>
+</table></div>
+<p>جمع هر طرف = ۵۹٬۲۰۰٬۰۰۰ ✅</p></section>
+<footer>جواب‌ها رو خودم حل کردم و تو کتاب نیست؛ فرض‌ها تو README پوشه آمده.</footer>
+</main></body></html>

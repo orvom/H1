@@ -1,0 +1,1211 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پودمان ۳ · حل کار عملی‌های تهیه و تنظیم ترازنامه</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;700;800&display=swap"><style>
+/* Layout: teal cover band, one notebook column; each practical work is a paper card; tables scroll sideways inside the card */
+:root { --bg:#f2f5f7; --paper:#fff; --ink:#16232b; --muted:#5a6b75; --rule:#d8e1e6; --accent:#0b7a78; --accent-soft:#dff1f0; --band:#0f3b3d; --band-ink:#eaf6f5; --marker:#ffe066; --head:#e9f2f3;
+  --f-display:"Lalezar","Vazirmatn",Tahoma,sans-serif; --f-body:"Vazirmatn",Tahoma,"Segoe UI",sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0c1317; --paper:#131e24; --ink:#e4edf1; --muted:#93a6b0; --rule:#26353d; --accent:#45c9c4; --accent-soft:#163332; --band:#0a2a2c; --band-ink:#e4f4f3; --marker:#6b5a12; --head:#1a2a31; color-scheme:dark; } }
+:root[data-theme="dark"] { --bg:#0c1317; --paper:#131e24; --ink:#e4edf1; --muted:#93a6b0; --rule:#26353d; --accent:#45c9c4; --accent-soft:#163332; --band:#0a2a2c; --band-ink:#e4f4f3; --marker:#6b5a12; --head:#1a2a31; color-scheme:dark; }
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.9; }
+.in { max-width:900px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); }
+.hero { background:var(--band); color:var(--band-ink); }
+.hero .in { padding-block:26px 20px; display:flex; flex-direction:column; gap:10px; }
+.hero h1 { font-family:var(--f-display); font-weight:400; font-size:clamp(1.8rem,6vw,2.6rem); line-height:1.35; margin:0; color:#fff; text-wrap:balance; }
+.hero p { margin:0; opacity:.9; max-width:60ch; }
+.eyebrow { font-size:.85rem; opacity:.75; }
+nav.mods, nav.probs { display:flex; flex-wrap:wrap; gap:8px; }
+nav a, nav button { font:inherit; font-size:.9rem; text-decoration:none; color:var(--band-ink); border:1px solid rgba(255,255,255,.4); padding:2px 12px; border-radius:999px; background:transparent; cursor:pointer; }
+nav a:hover, nav button:hover { background:rgba(255,255,255,.14); }
+nav a[aria-current="page"], nav button[aria-pressed="true"] { background:var(--marker); color:#16232b; border-color:var(--marker); font-weight:700; }
+nav.probs a { color:var(--accent); border-color:var(--accent); background:var(--paper); }
+main.in { padding-block:22px 60px; display:flex; flex-direction:column; gap:18px; }
+section.card { background:var(--paper); border:1px solid var(--rule); border-radius:14px; padding:20px; display:flex; flex-direction:column; gap:12px; min-width:0; scroll-margin-top:12px; }
+section.card.intro { background:var(--accent-soft); }
+section.card h2 { font-family:var(--f-display); font-weight:400; font-size:1.5rem; line-height:1.45; margin:0; color:var(--accent); text-wrap:balance; }
+section.card > * { margin:0; }
+p, blockquote { margin:0; }
+blockquote { background:var(--accent-soft); border-inline-start:4px solid var(--accent); padding:8px 14px; border-radius:6px; }
+blockquote p + p { margin-top:6px; }
+.card ul, .card ol { margin:0; padding-inline-start:1.4em; display:flex; flex-direction:column; gap:3px; }
+.scroll { overflow-x:auto; min-width:0; }
+table { border-collapse:collapse; width:100%; font-size:.92rem; font-variant-numeric:tabular-nums; }
+th, td { border-bottom:1px solid var(--rule); padding:5px 9px; text-align:start; vertical-align:top; }
+th { background:var(--head); color:var(--muted); font-size:.84rem; font-weight:700; white-space:nowrap; }
+td.num, th.num { text-align:left; white-space:nowrap; }
+tr:last-child td { border-bottom:0; }
+strong { font-weight:800; }
+sub { font-size:.82rem; color:var(--muted); line-height:1.6; }
+pre { background:var(--bg); border:1px solid var(--rule); border-radius:8px; padding:10px 14px; overflow-x:auto; direction:rtl; font-family:var(--f-body); line-height:1.8; margin:0; }
+code { font-family:var(--f-body); }
+a { color:var(--accent); }
+a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+footer { color:var(--muted); font-size:.85rem; text-align:center; padding-block:10px; }
+</style></head>
+<body>
+<div class="hero"><div class="in">
+<span class="eyebrow">حسابداری تهیه و تنظیم صورت‌های مالی · کد ۲۱۲۲۵۴ · پایه دوازدهم</span>
+<h1>پودمان ۳ · حل کار عملی‌های تهیه و تنظیم ترازنامه</h1>
+<nav class="mods" aria-label="پودمان‌ها"><a href="index.html">فهرست</a><a href="podman-1.html">پودمان ۱</a><a href="podman-2.html">پودمان ۲</a><a href="podman-3.html" aria-current="page">پودمان ۳</a><a href="podman-4.html">پودمان ۴</a><a href="podman-5.html">پودمان ۵</a></nav>
+<nav class="probs" aria-label="کار عملی‌ها"><a href="#m3-1">۱</a><a href="#m3-2">۲</a><a href="#m3-3">۳</a><a href="#m3-4">۴</a><a href="#m3-5">۵</a><a href="#m3-6">۶</a><a href="#m3-7">۷</a><a href="#m3-8">۸</a><a href="#m3-9">۹</a><a href="#m3-10">۱۰</a><a href="#m3-11">۱۱</a><a href="#m3-12">۱۲</a><a href="#m3-13">۱۳</a></nav>
+</div></div>
+<main class="in">
+<section class="card intro">
+<p>کتاب: «حسابداری تهیه و تنظیم صورت‌های مالی» (کد ۲۱۲۲۵۴). ارقام به <strong>ریال</strong> است مگر جایی که نوشته شده.</p>
+<blockquote>
+<p>یادآوری: <strong>معادله‌ی حسابداری</strong> دارایی‌ها = بدهی‌ها + سرمایه. دارایی جاری یعنی طی ۱۲ ماه (یا یک چرخه‌ی عملیاتی) به نقد تبدیل می‌شه یا مصرف می‌شه؛ بدهی جاری یعنی طی ۱۲ ماه (یا چرخه‌ی عملیاتی) باید تسویه بشه.
+هر ترازنامه‌ای که این‌جا حل شده با برنامه چک شده که جمع دارایی‌ها = جمع بدهی‌ها و سرمایه.</p>
+</blockquote>
+
+</section>
+<section class="card" id="m3-1"><h2>کار عملی ۱ · تغییرات دارایی، بدهی و سرمایه (مؤسسه بروجن)</h2>
+<p><strong>صورت مسئله:</strong> تغییرات سالانه‌ی دارایی‌ها، بدهی‌ها و سرمایه (هزار ریال) با چند مجهول داده شده؛ مجهول‌ها مشخص شود.</p>
+<p><strong>ایده:</strong> معادله‌ی حسابداری در هر سال برقراره، پس تغییرات هم همین رابطه رو دارن: <strong>تغییر دارایی = تغییر بدهی + تغییر سرمایه</strong>.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>سال</th>
+<th class="num">تغییر دارایی‌ها</th>
+<th class="num">تغییر بدهی‌ها</th>
+<th class="num">تغییر سرمایه</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>۱۳۹۳</td>
+<td class="num">+۱٬۵۰۰٬۰۰۰</td>
+<td class="num">+۱٬۱۲۰٬۰۰۰</td>
+<td class="num">+۳۸۰٬۰۰۰ ✅</td>
+</tr>
+<tr>
+<td>۱۳۹۴</td>
+<td class="num">−۱٬۶۰۰٬۰۰۰ ✅</td>
+<td class="num">−۲٬۲۱۰٬۰۰۰</td>
+<td class="num">+۶۱۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>۱۳۹۵</td>
+<td class="num">−۱٬۰۳۸٬۰۰۰ ✅</td>
+<td class="num">−۱٬۹۵۰٬۰۰۰</td>
+<td class="num">+۹۱۲٬۰۰۰</td>
+</tr>
+<tr>
+<td>۱۳۹۶</td>
+<td class="num">+۴۲۵٬۰۰۰</td>
+<td class="num">+۳۴۲٬۵۰۰ ✅</td>
+<td class="num">+۸۲٬۵۰۰</td>
+</tr>
+</tbody>
+</table></div>
+<p>(✅ = مقدار محاسبه‌شده.) مثلاً ۱۳۹۳: سرمایه = ۱٬۵۰۰٬۰۰۰ − ۱٬۱۲۰٬۰۰۰ = ۳۸۰٬۰۰۰؛ ۱۳۹۴: دارایی = (−۲٬۲۱۰٬۰۰۰) + ۶۱۰٬۰۰۰ = −۱٬۶۰۰٬۰۰۰؛ ۱۳۹۶: بدهی = ۴۲۵٬۰۰۰ − ۸۲٬۵۰۰ = ۳۴۲٬۵۰۰.</p>
+
+</section>
+<section class="card" id="m3-2"><h2>کار عملی ۲ · موجودی نقد</h2>
+<p><strong>صورت مسئله:</strong> با این اقلام مانده‌ی «موجودی نقد» مؤسسه را مشخص کنید: چک رمزدار (بین‌بانکی) ۶۱٬۰۰۰٬۰۰۰ · سپرده ۶ ماهه نزد بانک ۶۰٬۰۰۰٬۰۰۰ · سکه و اسکناس ۱۰٬۰۰۰٬۰۰۰ · تنخواه‌گردان ۱۰٬۰۰۰٬۰۰۰ · سپرده بانکی ۲ ساله ۴۰٬۰۰۰٬۰۰۰ · حساب جاری نزد بانک ۲۰٬۰۰۰٬۰۰۰ · وجوه پیش‌پرداخت‌شده برای خرید اموال ۳۵٬۰۰۰٬۰۰۰.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>قلم</th>
+<th class="num">مبلغ</th>
+<th>طبقه‌بندی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>سکه و اسکناس</td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+<td>✅ موجودی نقد</td>
+</tr>
+<tr>
+<td>تنخواه‌گردان</td>
+<td class="num">۱۰٬۰۰۰٬۰۰۰</td>
+<td>✅ موجودی نقد</td>
+</tr>
+<tr>
+<td>موجودی حساب جاری نزد بانک</td>
+<td class="num">۲۰٬۰۰۰٬۰۰۰</td>
+<td>✅ موجودی نقد (سپرده دیداری)</td>
+</tr>
+<tr>
+<td>چک رمزدار (بین‌بانکی)</td>
+<td class="num">۶۱٬۰۰۰٬۰۰۰</td>
+<td>✅ موجودی نقد (بدون محدودیت و قابل استفاده فوری، مثل وجه نقد)</td>
+</tr>
+<tr>
+<td>سپرده ۶ ماهه نزد بانک</td>
+<td class="num">۶۰٬۰۰۰٬۰۰۰</td>
+<td>❌ سررسید داره ← سرمایه‌گذاری کوتاه‌مدت</td>
+</tr>
+<tr>
+<td>سپرده بانکی ۲ ساله</td>
+<td class="num">۴۰٬۰۰۰٬۰۰۰</td>
+<td>❌ ← سرمایه‌گذاری بلندمدت (دارایی غیرجاری)</td>
+</tr>
+<tr>
+<td>وجوه پیش‌پرداخت‌شده برای خرید اموال</td>
+<td class="num">۳۵٬۰۰۰٬۰۰۰</td>
+<td>❌ ← دارایی ثابت (پیش‌پرداخت خرید دارایی ثابت)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>موجودی نقد = ۱۰٬۰۰۰٬۰۰۰ + ۱۰٬۰۰۰٬۰۰۰ + ۲۰٬۰۰۰٬۰۰۰ + ۶۱٬۰۰۰٬۰۰۰ = ۱۰۱٬۰۰۰٬۰۰۰ ریال.</strong></p>
+<blockquote>
+<p>نکته: چک رمزدار (بین‌بانکی) رو مثل وجه نقد حساب کردم چون هر لحظه قابل تبدیله و محدودیتی نداره. کتاب «سپرده‌های سرمایه‌گذاری بدون سررسید» رو جزو وجه نقد می‌دونه، سپرده‌ی ۶ ماهه سررسید داره پس نقد نیست.</p>
+</blockquote>
+
+</section>
+<section class="card" id="m3-3"><h2>کار عملی ۳ · موجودی مواد و کالا</h2>
+<p><strong>صورت مسئله:</strong> موجودی مواد اولیه ۳۰٬۰۰۰٬۰۰۰ · کالای امانی دیگران نزد ما ۷٬۰۰۰٬۰۰۰ · پیش‌پرداخت خرید کالا ۶٬۰۰۰٬۰۰۰ · کالای امانی نزد دیگران ۱۱٬۰۰۰٬۰۰۰ · کالای در راه ۶٬۵۰۰٬۰۰۰ · کالای در جریان ساخت ۲۵٬۰۰۰٬۰۰۰ · کالای ساخته‌شده ۷٬۰۰۰٬۰۰۰. مبلغ «موجودی مواد و کالا» چقدر است؟</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>قلم</th>
+<th class="num">مبلغ</th>
+<th>جزو موجودی؟</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>موجودی مواد اولیه</td>
+<td class="num">۳۰٬۰۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>کالای در جریان ساخت</td>
+<td class="num">۲۵٬۰۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>کالای ساخته‌شده</td>
+<td class="num">۷٬۰۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>کالای در راه (مزایا و مخاطرات منتقل شده)</td>
+<td class="num">۶٬۵۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>کالای امانی نزد دیگران (مال خودمونه، فقط پیش دیگرانه)</td>
+<td class="num">۱۱٬۰۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>کالای امانی دیگران نزد ما</td>
+<td class="num">۷٬۰۰۰٬۰۰۰</td>
+<td>❌ مال ما نیست</td>
+</tr>
+<tr>
+<td>پیش‌پرداخت خرید کالا</td>
+<td class="num">۶٬۰۰۰٬۰۰۰</td>
+<td>❌ پیش‌پرداخت است (دارایی جاری ولی جزو پیش‌پرداخت‌ها)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>موجودی مواد و کالا = ۳۰٬۰۰۰٬۰۰۰ + ۲۵٬۰۰۰٬۰۰۰ + ۷٬۰۰۰٬۰۰۰ + ۶٬۵۰۰٬۰۰۰ + ۱۱٬۰۰۰٬۰۰۰ = ۷۹٬۵۰۰٬۰۰۰ ریال.</strong></p>
+
+</section>
+<section class="card" id="m3-4"><h2>کار عملی ۴ · جمع دارایی‌های جاری</h2>
+<p><strong>صورت مسئله:</strong> موجودی نقد نزد بانک‌ها ۳۵٬۲۰۰٬۰۰۰ · پیش‌پرداخت خرید وسایل نقلیه ۳۵۰٬۰۰۰٬۰۰۰ · مساعده کارکنان ۳۸٬۳۰۰٬۰۰۰ · تنخواه‌گردان ۸٬۰۰۰٬۰۰۰ · بدهی بابت مالیات بر ارزش افزوده ۶٬۹۵۰٬۰۰۰ · کالای در راه ۳۲٬۲۰۰٬۰۰۰ · کالای امانی دیگران ۱۵۰٬۰۰۰٬۰۰۰ · دارایی نگهداری‌شده برای فروش ۱۰۰٬۰۰۰٬۰۰۰.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>قلم</th>
+<th class="num">مبلغ</th>
+<th>جاری؟</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>موجودی نقد نزد بانک‌ها</td>
+<td class="num">۳۵٬۲۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>موجودی نزد تنخواه‌گردان</td>
+<td class="num">۸٬۰۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>مساعده کارکنان</td>
+<td class="num">۳۸٬۳۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>کالای در راه</td>
+<td class="num">۳۲٬۲۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>دارایی نگهداری‌شده برای فروش</td>
+<td class="num">۱۰۰٬۰۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>پیش‌پرداخت خرید وسایل نقلیه</td>
+<td class="num">۳۵۰٬۰۰۰٬۰۰۰</td>
+<td>❌ پیش‌پرداخت دارایی ثابت ← دارایی ثابت مشهود (غیرجاری)</td>
+</tr>
+<tr>
+<td>بدهی بابت مالیات بر ارزش افزوده</td>
+<td class="num">۶٬۹۵۰٬۰۰۰</td>
+<td>❌ بدهیه، دارایی نیست</td>
+</tr>
+<tr>
+<td>کالای امانی دیگران در مؤسسه</td>
+<td class="num">۱۵۰٬۰۰۰٬۰۰۰</td>
+<td>❌ مال ما نیست</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جمع دارایی‌های جاری = ۲۱۳٬۷۰۰٬۰۰۰ ریال.</strong></p>
+
+</section>
+<section class="card" id="m3-5"><h2>کار عملی ۵ · جمع دارایی‌های جاری و غیرجاری (مؤسسه سبزوار)</h2>
+<p><strong>صورت مسئله:</strong> ۱۴ حساب (به میلیون ریال) داده شده؛ جمع دارایی‌های جاری و غیرجاری مشخص شود.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">میلیون ریال</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>دارایی‌های جاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی نقد</td>
+<td class="num">۱٬۰۷۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های کوتاه‌مدت</td>
+<td class="num">۲٬۰۰۰</td>
+</tr>
+<tr>
+<td>دریافتنی‌های تجاری و غیرتجاری</td>
+<td class="num">۴٬۱۲۰</td>
+</tr>
+<tr>
+<td>موجودی مواد و کالا</td>
+<td class="num">۱٬۱۹۰</td>
+</tr>
+<tr>
+<td>پیش‌پرداخت‌ها</td>
+<td class="num">۱۷۰</td>
+</tr>
+<tr>
+<td>دارایی‌های نگهداری‌شده برای فروش</td>
+<td class="num">۱٬۵۵۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های جاری</strong></td>
+<td class="num"><strong>۱۰٬۱۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>دارایی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>دریافتنی‌های بلندمدت</td>
+<td class="num">۱٬۸۲۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های بلندمدت (۱٬۹۳۰ + سپرده ۵ ساله نزد بانک ۷۸۰)</td>
+<td class="num">۲٬۷۱۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری در املاک</td>
+<td class="num">۶۰۰</td>
+</tr>
+<tr>
+<td>دارایی‌های نامشهود</td>
+<td class="num">۲۵۰</td>
+</tr>
+<tr>
+<td>دارایی‌های ثابت مشهود</td>
+<td class="num">۱۴٬۲۰۰</td>
+</tr>
+<tr>
+<td>سایر دارایی‌ها: سپرده نزد صندوق دادگستری ۲۰۰ + وجوه نقد مسدودشده ۱٬۱۰۰</td>
+<td class="num">۱٬۳۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های غیرجاری</strong></td>
+<td class="num"><strong>۲۰٬۸۸۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌ها</strong></td>
+<td class="num"><strong>۳۰٬۹۸۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>«سپرده ۵ ساله نزد بانک» رو سرمایه‌گذاری بلندمدت حساب کردم؛ «سپرده نزد صندوق دادگستری» و «وجوه نقد مسدودشده» طبق کتاب «سایر دارایی‌ها» ان.</p>
+</blockquote>
+
+</section>
+<section class="card" id="m3-6"><h2>کار عملی ۶ · بخش دارایی‌های ترازنامه (مؤسسه سراوان)</h2>
+<p><strong>صورت مسئله:</strong> از ۲۵ حساب، بخش دارایی‌های ترازنامه‌ی طبقه‌بندی‌شده‌ی ۱۳۹۶ (با ستون ۱۳۹۵) تهیه شود.</p>
+<p><strong>جداسازی حساب‌ها:</strong> «ذخیره مزایای پایان خدمت» و «پیش‌دریافت فروش» بدهی‌ان و تو بخش دارایی نمیان. «کالای امانی دیگران نزد ما» مال ما نیست و وارد ترازنامه نمی‌شه. استهلاک انباشته‌ها از دارایی مربوطه کم می‌شن. امتیاز تلفن، حق امتیاز برق و نرم‌افزار حسابداری ← دارایی نامشهود.</p>
+<p><strong>بخش دارایی‌های ترازنامه · مؤسسه سراوان (ریال)</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">۱۳۹۶/۱۲/۲۹</th>
+<th class="num">۱۳۹۵/۱۲/۳۰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>دارایی‌های جاری:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی نقد</td>
+<td class="num">۳۵۷٬۴۹۵٬۲۶۱</td>
+<td class="num">۲۲۲٬۰۶۱٬۰۵۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های کوتاه‌مدت</td>
+<td class="num">۷۳٬۰۰۰٬۰۰۰</td>
+<td class="num">۵۱٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دریافتنی‌های تجاری و غیرتجاری</td>
+<td class="num">۴۱٬۶۷۲٬۰۰۰</td>
+<td class="num">۲۵٬۷۲۳٬۲۰۰</td>
+</tr>
+<tr>
+<td>موجودی مواد و کاال</td>
+<td class="num">۴۷۶٬۹۰۰٬۲۵۰</td>
+<td class="num">۳۳۴٬۳۰۴٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های جاری</strong></td>
+<td class="num"><strong>۹۴۹٬۰۶۷٬۵۱۱</strong></td>
+<td class="num"><strong>۶۳۳٬۵۸۸٬۲۵۰</strong></td>
+</tr>
+<tr>
+<td><strong>دارایی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>دریافتنی‌های بلندمدت</td>
+<td class="num">۷۵٬۲۶۰٬۰۰۰</td>
+<td class="num">۴۲٬۵۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های بلندمدت</td>
+<td class="num">۳۱۰٬۰۰۰٬۰۰۰</td>
+<td class="num">۱۹۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دارایی‌های نامشهود</td>
+<td class="num">۲۴٬۹۰۰٬۰۰۰</td>
+<td class="num">۱۰٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دارایی‌های ثابت مشهود (خالص ارزش دفتری)</td>
+<td class="num">۸۳۰٬۰۳۹٬۹۶۷</td>
+<td class="num">۶۹۷٬۶۶۰٬۹۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های غیرجاری</strong></td>
+<td class="num"><strong>۱٬۲۴۰٬۱۹۹٬۹۶۷</strong></td>
+<td class="num"><strong>۹۴۰٬۴۱۰٬۹۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌ها</strong></td>
+<td class="num"><strong>۲٬۱۸۹٬۲۶۷٬۴۷۸</strong></td>
+<td class="num"><strong>۱٬۵۷۳٬۹۹۹٬۱۵۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+<section class="card" id="m3-7"><h2>کار عملی ۷ · جمع بدهی‌های جاری</h2>
+<p><strong>صورت مسئله:</strong> مالیات بر ارزش افزوده ۳۰٬۵۰۰٬۰۰۰ · پیش‌پرداخت خرید مواد ۵۲٬۰۰۰٬۰۰۰ · پیش‌دریافت فروش ۷۰٬۵۰۰٬۰۰۰ · پرداختنی‌های تجاری ۲۲۲٬۰۰۰٬۰۰۰ · حقوق پرداختنی ۱۵۲٬۰۰۰٬۰۰۰ · وام پرداختنی ۱۱۰٬۹۰۰٬۰۰۰ · پیش‌پرداخت‌ها ۱۸۵٬۹۰۰٬۰۰۰ · ذخیره مزایای پایان خدمت ۲۴۲٬۰۰۰٬۰۰۰. جمع بدهی‌های جاری چقدره؟</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>قلم</th>
+<th class="num">مبلغ</th>
+<th>بدهی جاری؟</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>بدهی بابت مالیات بر ارزش افزوده</td>
+<td class="num">۳۰٬۵۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>حقوق پرداختنی</td>
+<td class="num">۱۵۲٬۰۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>وام پرداختنی</td>
+<td class="num">۱۱۰٬۹۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>پیش‌دریافت فروش</td>
+<td class="num">۷۰٬۵۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>پرداختنی‌های تجاری</td>
+<td class="num">۲۲۲٬۰۰۰٬۰۰۰</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>پیش‌پرداخت خرید مواد</td>
+<td class="num">۵۲٬۰۰۰٬۰۰۰</td>
+<td>❌ دارایی (پیش‌پرداخت)</td>
+</tr>
+<tr>
+<td>پیش‌پرداخت‌ها</td>
+<td class="num">۱۸۵٬۹۰۰٬۰۰۰</td>
+<td>❌ دارایی</td>
+</tr>
+<tr>
+<td>ذخیره مزایای پایان خدمت کارکنان</td>
+<td class="num">۲۴۲٬۰۰۰٬۰۰۰</td>
+<td>❌ بدهی غیرجاری</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جمع بدهی‌های جاری = ۵۸۵٬۹۰۰٬۰۰۰ ریال.</strong></p>
+<blockquote>
+<p>فرض: «وام پرداختنی» بدون ذکر «بلندمدت» بوده، پس تسهیلات جاری حساب شد.</p>
+</blockquote>
+
+</section>
+<section class="card" id="m3-8"><h2>کار عملی ۸ · درصد تغییرات بدهی‌های جاری (مؤسسه آباده)</h2>
+<p><strong>صورت مسئله:</strong> بخشی از ترازنامه (میلیون ریال) با مقادیر ۱۳۹۶ و ۱۳۹۵ داده شده؛ ستون «درصد تغییرات» و جمع بدهی‌های جاری مشخص شود.</p>
+<p><strong>فرمول:</strong> درصد تغییر = (مبلغ ۱۳۹۶ − مبلغ ۱۳۹۵) ÷ مبلغ ۱۳۹۵ × ۱۰۰</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">۱۳۹۶/۱۲/۲۹</th>
+<th class="num">۱۳۹۵/۱۲/۳۰</th>
+<th class="num">درصد تغییرات</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>پرداختنی تجاری</td>
+<td class="num">۱٬۳۵۰</td>
+<td class="num">۴۵۰</td>
+<td class="num">۲۰۰٪</td>
+</tr>
+<tr>
+<td>پرداختنی غیرتجاری</td>
+<td class="num">۸۰</td>
+<td class="num">۵۰</td>
+<td class="num">۶۰٪</td>
+</tr>
+<tr>
+<td>مالیات پرداختنی</td>
+<td class="num">۳۰</td>
+<td class="num">۲۰</td>
+<td class="num">۵۰٪</td>
+</tr>
+<tr>
+<td>تسهیلات مالی</td>
+<td class="num">۱٬۰۰۰</td>
+<td class="num">۱٬۶۰۰</td>
+<td class="num">−۳۷.۵٪</td>
+</tr>
+<tr>
+<td>ذخایر</td>
+<td class="num">۹۰</td>
+<td class="num">۸۰</td>
+<td class="num">۱۲.۵٪</td>
+</tr>
+<tr>
+<td>پیش‌دریافت‌ها</td>
+<td class="num">۱۸</td>
+<td class="num">۱۸</td>
+<td class="num">۰٪</td>
+</tr>
+<tr>
+<td>بدهی‌های مرتبط با دارایی‌های نگهداری‌شده برای فروش</td>
+<td class="num">۱۵</td>
+<td class="num">۲۰</td>
+<td class="num">−۲۵٪</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های جاری</strong></td>
+<td class="num"><strong>۲٬۵۸۳</strong></td>
+<td class="num"><strong>۲٬۲۳۸</strong></td>
+<td class="num"><strong>۱۵.۴٪</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>مثلاً پرداختنی تجاری: (۱٬۳۵۰ − ۴۵۰) ÷ ۴۵۰ = ۲۰۰٪ افزایش؛ تسهیلات مالی: (۱٬۰۰۰ − ۱٬۶۰۰) ÷ ۱٬۶۰۰ = ۳۷٫۵٪− کاهش.</p>
+
+</section>
+<section class="card" id="m3-9"><h2>کار عملی ۹ · بخش بدهی‌های ترازنامه (مؤسسه اراک)</h2>
+<p><strong>صورت مسئله:</strong> از ۱۷ حساب، بخش بدهی‌های ترازنامه‌ی طبقه‌بندی‌شده‌ی مؤسسه در پایان ۱۳۹۶ (با ۱۳۹۵) تهیه شود.</p>
+<p><strong>جداسازی:</strong> «کالای امانی مؤسسه نزد دیگران» و «مساعده کارکنان» دارایی‌ان، «سود انباشته» جزو سرمایه‌ست؛ پس از بخش بدهی‌ها بیرونن. «بدهی خرید ساختمان که ۲۶ ماه بعد پرداخت می‌شه» و وامی که از ۵ سال بعد شروع به بازپرداخت می‌شه غیرجاری‌ان. «بیمه، مالیات حقوق، حقوق پرداخت‌نشده، سپرده حسن انجام کار» پرداختنی‌های غیرتجاری‌ان.</p>
+<p><strong>بخش بدهی‌های ترازنامه · مؤسسه اراک (ریال)</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">۱۳۹۶/۱۲/۲۹</th>
+<th class="num">۱۳۹۵/۱۲/۳۰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>بدهی‌های جاری:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>پرداختنی‌های تجاری و غیرتجاری</td>
+<td class="num">۵۹۸٬۱۹۲٬۰۵۴</td>
+<td class="num">۳۶۷٬۹۷۴٬۱۰۰</td>
+</tr>
+<tr>
+<td>مالیات پرداختنی</td>
+<td class="num">۱۱٬۸۷۵٬۰۰۰</td>
+<td class="num">۹٬۷۵۸٬۲۰۰</td>
+</tr>
+<tr>
+<td>تسهیلات مالی</td>
+<td class="num">۳۱٬۲۰۰٬۰۰۰</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>ذخایر</td>
+<td class="num">۷۱٬۱۳۷٬۵۰۰</td>
+<td class="num">۴۲٬۷۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>پیش‌دریافت‌ها</td>
+<td class="num">۹۲٬۰۰۰٬۰۰۰</td>
+<td class="num">۷۵٬۸۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بدهی‌های مرتبط با دارایی‌های نگهداری‌شده برای فروش</td>
+<td class="num">۲۵۰٬۰۰۰٬۰۰۰</td>
+<td class="num">۳۹۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های جاری</strong></td>
+<td class="num"><strong>۱٬۰۵۴٬۴۰۴٬۵۵۴</strong></td>
+<td class="num"><strong>۸۸۶٬۲۸۲٬۳۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>بدهی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>پرداختنی‌های بلندمدت</td>
+<td class="num">۱۲۲٬۰۰۰٬۰۰۰</td>
+<td class="num">۰</td>
+</tr>
+<tr>
+<td>تسهیلات مالی بلندمدت</td>
+<td class="num">۳٬۴۱۵٬۵۵۶٬۰۰۰</td>
+<td class="num">۳٬۴۱۵٬۵۵۶٬۰۰۰</td>
+</tr>
+<tr>
+<td>ذخیره مزایای پایان خدمت کارکنان</td>
+<td class="num">۶۰۲٬۴۰۰٬۰۰۰</td>
+<td class="num">۵۰٬۲۱۰٬۴۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های غیرجاری</strong></td>
+<td class="num"><strong>۴٬۱۳۹٬۹۵۶٬۰۰۰</strong></td>
+<td class="num"><strong>۳٬۴۶۵٬۷۶۶٬۴۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌ها</strong></td>
+<td class="num"><strong>۵٬۱۹۴٬۳۶۰٬۵۵۴</strong></td>
+<td class="num"><strong>۴٬۳۵۲٬۰۴۸٬۷۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+<section class="card" id="m3-10"><h2>کار عملی ۱۰ · مقایسه‌ی صورت‌های مالی دو مؤسسه از سایت کدال</h2>
+<p><strong>صورت مسئله:</strong> از www.codal.ir ترازنامه و صورت سود و زیان دو مؤسسه را بردارید، در کلاس بررسی و مقایسه کنید.</p>
+<p>این یکی تحقیق و کار کلاسیه و جواب عددی نداره (من هم از این‌جا به سایت کدال دسترسی ندارم). راه انجامش:</p>
+<ol>
+<li>تو codal.ir دو شرکت هم‌گروه انتخاب کن (مثلاً دو شرکت بازرگانی یا دو شرکت تولیدی).</li>
+<li>از «صورت‌های مالی» آخرین دوره‌ی ۱۲ ماهه، «صورت وضعیت مالی» (همون ترازنامه) و «صورت سود و زیان» رو دانلود کن.</li>
+<li><strong>ترازنامه:</strong> نسبت جمع دارایی جاری به جمع بدهی جاری (نسبت جاری) = توان پرداخت بدهی کوتاه‌مدت؛ سهم بدهی از کل (جمع بدهی‌ها ÷ جمع دارایی‌ها)؛ جمع سرمایه و سود (زیان) انباشته.</li>
+<li><strong>سود و زیان:</strong> حاشیه‌ی سود ناخالص = سود ناخالص ÷ فروش؛ حاشیه‌ی سود عملیاتی؛ حاشیه‌ی سود خالص.</li>
+<li>بنویس کدوم شرکت نقدینگی بهتر، بدهی کمتر و سودآوری بالاتر داره و دو شرکت رو تو یه جدول کنار هم بذار.</li>
+</ol>
+
+</section>
+<section class="card" id="m3-11"><h2>کار عملی ۱۱ · اصلاح ترازنامه‌ی نادرست (مؤسسه فیروزکوه)</h2>
+<p><strong>صورت مسئله:</strong> ترازنامه‌ی حسابدار اشکال داره (اقلام تو طبقه‌ی اشتباه). ترازنامه‌ی طبقه‌بندی‌شده‌ی صحیح تهیه شود.</p>
+<p><strong>اشکالات پیدا‌شده و اصلاحشون:</strong>
+| اشتباه | درست |
+|---|---|
+| «موجودی مواد و کالا» ۱٬۵۹۲٬۲۰۰٬۰۰۰ تو دارایی‌های <strong>غیرجاری</strong> | دارایی <strong>جاری</strong> است |
+| «دارایی‌های نامشهود» ۲۲۹٬۵۰۰٬۰۰۰ تو دارایی‌های <strong>جاری</strong> | دارایی <strong>غیرجاری</strong> |
+| «مالیات پرداختنی» ۱۲۷٬۵۰۰٬۰۰۰ تو <strong>دارایی‌ها</strong> نوشته شده | <strong>بدهی جاری</strong> است |
+| «پیش‌پرداخت‌ها» ۱۲٬۳۰۰٬۰۰۰ تو <strong>بدهی‌ها</strong> | <strong>دارایی جاری</strong> است |
+| «ذخیره مزایای پایان خدمت» ۵۴۰٬۰۰۰٬۰۰۰ تو بدهی‌های <strong>جاری</strong> | بدهی <strong>غیرجاری</strong> |
+| «تسهیلات مالی» ۱۵۰٬۰۰۰٬۰۰۰ تو بدهی‌های <strong>غیرجاری</strong> | حصه‌ی جاری وام است ← بدهی <strong>جاری</strong> |
+| ترتیب بخش‌ها: بدهی غیرجاری قبل از جاری آمده | اول جاری، بعد غیرجاری |</p>
+<p><strong>ترازنامه‌ی صحیح · مؤسسه فیروزکوه · ۱۳۹۶/۱۲/۲۹ (دارایی‌ها)</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">ریال</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>دارایی‌های جاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی نقد</td>
+<td class="num">۴۴۶٬۷۲۵٬۱۰۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های کوتاه‌مدت</td>
+<td class="num">۳۲۵٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دریافتنی‌های تجاری و غیرتجاری</td>
+<td class="num">۴۷۵٬۲۰۰٬۳۰۰</td>
+</tr>
+<tr>
+<td>موجودی مواد و کالا</td>
+<td class="num">۱٬۵۹۲٬۲۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>پیش‌پرداخت‌ها</td>
+<td class="num">۱۲٬۳۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های جاری</strong></td>
+<td class="num"><strong>۲٬۸۵۱٬۴۲۵٬۴۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>دارایی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>دریافتنی‌های بلندمدت</td>
+<td class="num">۳۰۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های بلندمدت</td>
+<td class="num">۱٬۸۰۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری در املاک</td>
+<td class="num">۱۰۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دارایی‌های نامشهود</td>
+<td class="num">۲۲۹٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دارایی‌های ثابت مشهود</td>
+<td class="num">۲٬۰۵۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های غیرجاری</strong></td>
+<td class="num"><strong>۴٬۴۷۹٬۵۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌ها</strong></td>
+<td class="num"><strong>۷٬۳۳۰٬۹۲۵٬۴۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>بدهی‌ها و حقوق صاحبان سرمایه</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">ریال</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>بدهی‌های جاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>پرداختنی‌های تجاری و غیرتجاری</td>
+<td class="num">۱٬۲۱۷٬۸۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>مالیات پرداختنی</td>
+<td class="num">۱۲۷٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>تسهیلات مالی</td>
+<td class="num">۱۵۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>پیش‌دریافت‌ها</td>
+<td class="num">۱۰۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های جاری</strong></td>
+<td class="num"><strong>۱٬۵۹۵٬۳۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>بدهی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تسهیلات مالی بلندمدت</td>
+<td class="num">۴۰۲٬۵۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>ذخیره مزایای پایان خدمت کارکنان</td>
+<td class="num">۵۴۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های غیرجاری</strong></td>
+<td class="num"><strong>۹۴۲٬۵۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌ها</strong></td>
+<td class="num"><strong>۲٬۵۳۷٬۸۰۰٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>حقوق صاحبان سرمایه:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سرمایه</td>
+<td class="num">۳٬۰۰۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سود انباشته</td>
+<td class="num">۱٬۷۹۳٬۱۲۵٬۴۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع حقوق صاحبان سرمایه</strong></td>
+<td class="num"><strong>۴٬۷۹۳٬۱۲۵٬۴۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌ها و حقوق صاحبان سرمایه</strong></td>
+<td class="num"><strong>۷٬۳۳۰٬۹۲۵٬۴۰۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جمع دو طرف ترازنامه‌ی اصلاح‌شده دقیقاً برابر شد: ۷٬۳۳۰٬۹۲۵٬۴۰۰ ریال</strong> ✅ (جمع ترازنامه‌ی نادرست فقط به‌خاطر جابه‌جایی طبقه‌ها غلط بود، نه خود مبالغ).</p>
+
+</section>
+<section class="card" id="m3-12"><h2>کار عملی ۱۲ · تکمیل ترازنامه‌ی ناقص (مؤسسه بلوچستان)</h2>
+<p><strong>صورت مسئله:</strong> ترازنامه (به صدهزار ریال) چند جای خالی داره؛ با «سایر اطلاعات» (۱. سرمایه ۱۳۹۶ نسبت به ۱۳۹۵ ده درصد رشد؛ ۲. در ۱۳۹۵ دارایی غیرجاری دو برابر جاری؛ ۳. سایر دارایی‌های ۱۳۹۶ یازده درصد بیشتر از سال قبل) کامل شود.</p>
+<p><strong>مسیر حل (مرحله به مرحله):</strong></p>
+<ol>
+<li><strong>برچسب‌های خالی</strong> با ترتیب ثابت ترازنامه پر می‌شن: بعد از دریافتنی‌ها ← «موجودی مواد و کالا»؛ اولین قلم غیرجاری ← «دریافتنی‌های بلندمدت»؛ بعد از نامشهود ← «دارایی‌های ثابت مشهود»؛ آخر بدهی جاری ← «بدهی‌های مرتبط با دارایی‌های نگهداری‌شده برای فروش»؛ آخر بدهی غیرجاری ← «ذخیره مزایای پایان خدمت». (مبلغ‌های اون ردیف‌ها خودشون داده شدن.)</li>
+<li>جمع دارایی‌های جاری ۱۳۹۵ = ۸٬۲۹۸ + ۱۳٬۹۰۵ + ۳۵٬۰۱۰ + ۹٬۴۵۰ + ۱٬۲۸۷ + ۱۱٬۱۶۰ = ۷۹٬۱۱۰. طبق اطلاعات ۲: دارایی غیرجاری ۱۳۹۵ = ۲ × ۷۹٬۱۱۰ = <strong>۱۵۸٬۲۲۰</strong> ← جمع دارایی‌ها ۱۳۹۵ = <strong>۲۳۷٬۳۳۰</strong>.</li>
+<li>سایر دارایی‌ها ۱۳۹۶ = ۲٬۰۰۰ × ۱٫۱۱ = <strong>۲٬۲۲۰</strong>.</li>
+<li>دارایی غیرجاری ۱۳۹۶ = ۱۹۷٬۳۴۰ داده شده؛ دریافتنی بلندمدت ۱۳۹۶ = ۱۹۷٬۳۴۰ − (۲۱٬۲۳۰ + ۶٬۶۰۰ + ۲٬۷۵۰ + ۱۴٬۵۴۰ + ۲٬۲۲۰) = <strong>۱۵۰٬۰۰۰</strong>.</li>
+<li>سرمایه‌گذاری بلندمدت ۱۳۹۵ = ۱۵۸٬۲۲۰ − (۱۵٬۹۴۰ + ۴٬۹۵۰ + ۲٬۱۰۰ + ۱۱۵٬۲۰۰ + ۲٬۰۰۰) = <strong>۱۸٬۰۳۰</strong>.</li>
+<li>تسهیلات مالی (جاری) ۱۳۹۵ = ۳۷٬۱۸۰ − (۳٬۸۷۰ + ۹۰۰ + ۶٬۱۷۵ + ۷٬۳۳۵ + ۱٬۳۵۰) = <strong>۱۷٬۵۵۰</strong>.</li>
+<li>سرمایه ۱۳۹۵ = جمع دارایی‌ها − بدهی‌ها − سود انباشته = ۲۳۷٬۳۳۰ − ۹۴٬۲۷۰ − ۲۵٬۰۶۰ = <strong>۱۱۸٬۰۰۰</strong> ← سرمایه ۱۳۹۶ = ۱٫۱ × ۱۱۸٬۰۰۰ = <strong>۱۲۹٬۸۰۰</strong>.</li>
+<li>پرداختنی بلندمدت ۱۳۹۶ = ۳۰۸٬۴۴۰ − (۴۹٬۷۴۲ + ۲۳٬۳۲۰ + ۳۸٬۶۷۶ + ۱۲۹٬۸۰۰ + ۵۱٬۴۰۳) = <strong>۱۵٬۴۹۹</strong>.</li>
+</ol>
+<p><strong>ترازنامه‌ی کامل · مؤسسه بلوچستان (صدهزار ریال) · دارایی‌ها</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">۱۳۹۶/۱۲/۲۹</th>
+<th class="num">۱۳۹۵/۱۲/۳۰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>دارایی‌های جاری:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی نقد</td>
+<td class="num">۱۱٬۷۷۰</td>
+<td class="num">۸٬۲۹۸</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های کوتاه‌مدت</td>
+<td class="num">۲۲٬۰۰۰</td>
+<td class="num">۱۳٬۹۰۵</td>
+</tr>
+<tr>
+<td>دریافتنی‌های تجاری و غیرتجاری</td>
+<td class="num">۴۵٬۳۲۰</td>
+<td class="num">۳۵٬۰۱۰</td>
+</tr>
+<tr>
+<td><strong>موجودی مواد و کالا</strong> ✅</td>
+<td class="num">۱۳٬۰۹۰</td>
+<td class="num">۹٬۴۵۰</td>
+</tr>
+<tr>
+<td>پیش‌پرداخت‌ها</td>
+<td class="num">۱٬۸۷۰</td>
+<td class="num">۱٬۲۸۷</td>
+</tr>
+<tr>
+<td>دارایی‌های نگهداری‌شده برای فروش</td>
+<td class="num">۱۷٬۰۵۰</td>
+<td class="num">۱۱٬۱۶۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های جاری</strong></td>
+<td class="num"><strong>۱۱۱٬۱۰۰</strong></td>
+<td class="num"><strong>۷۹٬۱۱۰</strong></td>
+</tr>
+<tr>
+<td><strong>دارایی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td><strong>دریافتنی‌های بلندمدت</strong> ✅</td>
+<td class="num">۱۵۰٬۰۰۰</td>
+<td class="num">۱۵٬۹۴۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های بلندمدت</td>
+<td class="num">۲۱٬۲۳۰</td>
+<td class="num">۱۸٬۰۳۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری در املاک</td>
+<td class="num">۶٬۶۰۰</td>
+<td class="num">۴٬۹۵۰</td>
+</tr>
+<tr>
+<td>دارایی‌های نامشهود</td>
+<td class="num">۲٬۷۵۰</td>
+<td class="num">۲٬۱۰۰</td>
+</tr>
+<tr>
+<td><strong>دارایی‌های ثابت مشهود</strong> ✅</td>
+<td class="num">۱۴٬۵۴۰</td>
+<td class="num">۱۱۵٬۲۰۰</td>
+</tr>
+<tr>
+<td>سایر دارایی‌ها</td>
+<td class="num">۲٬۲۲۰</td>
+<td class="num">۲٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های غیرجاری</strong></td>
+<td class="num"><strong>۱۹۷٬۳۴۰</strong></td>
+<td class="num"><strong>۱۵۸٬۲۲۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌ها</strong></td>
+<td class="num"><strong>۳۰۸٬۴۴۰</strong></td>
+<td class="num"><strong>۲۳۷٬۳۳۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>بدهی‌ها و حقوق صاحبان سرمایه</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">۱۳۹۶/۱۲/۲۹</th>
+<th class="num">۱۳۹۵/۱۲/۳۰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>بدهی‌های جاری:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>پرداختنی‌های تجاری و غیرتجاری</td>
+<td class="num">۵٬۱۷۰</td>
+<td class="num">۳٬۸۷۰</td>
+</tr>
+<tr>
+<td>مالیات پرداختنی</td>
+<td class="num">۱٬۱۰۰</td>
+<td class="num">۹۰۰</td>
+</tr>
+<tr>
+<td>تسهیلات مالی</td>
+<td class="num">۲۳٬۱۰۰</td>
+<td class="num">۱۷٬۵۵۰</td>
+</tr>
+<tr>
+<td>ذخایر</td>
+<td class="num">۸٬۲۵۰</td>
+<td class="num">۶٬۱۷۵</td>
+</tr>
+<tr>
+<td>پیش‌دریافت‌ها</td>
+<td class="num">۱۰٬۱۴۲</td>
+<td class="num">۷٬۳۳۵</td>
+</tr>
+<tr>
+<td><strong>بدهی‌های مرتبط با دارایی‌های نگهداری‌شده برای فروش</strong> ✅</td>
+<td class="num">۱٬۹۸۰</td>
+<td class="num">۱٬۳۵۰</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های جاری</strong></td>
+<td class="num"><strong>۴۹٬۷۴۲</strong></td>
+<td class="num"><strong>۳۷٬۱۸۰</strong></td>
+</tr>
+<tr>
+<td><strong>بدهی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>پرداختنی‌های بلندمدت</td>
+<td class="num">۱۵٬۴۹۹</td>
+<td class="num">۱۲٬۸۹۰</td>
+</tr>
+<tr>
+<td>تسهیلات مالی بلندمدت</td>
+<td class="num">۲۳٬۳۲۰</td>
+<td class="num">۱۹٬۹۰۰</td>
+</tr>
+<tr>
+<td><strong>ذخیره مزایای پایان خدمت کارکنان</strong> ✅</td>
+<td class="num">۳۸٬۶۷۶</td>
+<td class="num">۲۴٬۳۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های غیرجاری</strong></td>
+<td class="num"><strong>۷۷٬۴۹۵</strong></td>
+<td class="num"><strong>۵۷٬۰۹۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌ها</strong></td>
+<td class="num"><strong>۱۲۷٬۲۳۷</strong></td>
+<td class="num"><strong>۹۴٬۲۷۰</strong></td>
+</tr>
+<tr>
+<td><strong>حقوق صاحبان سرمایه:</strong></td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>سرمایه</td>
+<td class="num">۱۲۹٬۸۰۰</td>
+<td class="num">۱۱۸٬۰۰۰</td>
+</tr>
+<tr>
+<td>سود انباشته</td>
+<td class="num">۵۱٬۴۰۳</td>
+<td class="num">۲۵٬۰۶۰</td>
+</tr>
+<tr>
+<td><strong>جمع حقوق صاحبان سرمایه</strong></td>
+<td class="num"><strong>۱۸۱٬۲۰۳</strong></td>
+<td class="num"><strong>۱۴۳٬۰۶۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌ها و حقوق صاحبان سرمایه</strong></td>
+<td class="num"><strong>۳۰۸٬۴۴۰</strong></td>
+<td class="num"><strong>۲۳۷٬۳۳۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>(✅ و پررنگ = جای خالی که ما پر کردیم.) جمع‌ها هر دو سال متوازن شدن.
+نکته: «دریافتنی بلندمدت ۱۳۹۶» = ۱۶۴٬۵۴۰ − دارایی ثابت ۱۳۹۶ (طبق عدد چاپی کتاب ۱۴٬۵۴۰) = ۱۵۰٬۰۰۰ (عدد گرد، یعنی با داده‌ی کتاب جور درمیاد). اگه تو چاپ شما دارایی ثابت ۱۳۹۶ عدد دیگه‌ای باشه، فقط همین یه ردیف عوض می‌شه.</p>
+</blockquote>
+
+</section>
+<section class="card" id="m3-13"><h2>کار عملی ۱۳ · ترازنامه‌ی طبقه‌بندی‌شده‌ی مؤسسه رامسر</h2>
+<p><strong>صورت مسئله:</strong> با ۳۷ حساب (مانده ۱۳۹۶/۱۲/۲۹، مؤسسه در ۱۳۹۶ تأسیس شده)، ترازنامه‌ی طبقه‌بندی‌شده‌ی مؤسسه تهیه شود.</p>
+<p><strong>طبقه‌بندی هر حساب</strong> (شماره‌ها ردیف‌های کتاب‌ان):</p>
+<ul>
+<li><strong>نقد:</strong> ۳ وجوه در راه، ۲۰ بانک، ۲۳ صندوق · <strong>سرمایه‌گذاری کوتاه‌مدت:</strong> ۴ · <strong>دریافتنی:</strong> ۲ و ۶</li>
+<li><strong>موجودی مواد و کالا:</strong> ۹، ۱۶ (ملزومات)، ۳۰ (مواد اولیه‌ی مازاد برای فروش)، ۳۴ (در جریان ساخت)، ۳۶ · <strong>پیش‌پرداخت‌ها:</strong> ۱۵ و ۱۸ · <strong>نگهداری‌شده برای فروش:</strong> ۳۵</li>
+<li><strong>غیرجاری:</strong> ۱۷ (دریافتنی بلندمدت)، ۱ (سرمایه‌گذاری بلندمدت)، ۱۴/۱۹/۳۱ (نامشهود)، ۲۴ − ۷ + ۲۷ (ثابت مشهود؛ پیش‌پرداخت ماشین‌آلات جزو دارایی ثابت)، ۲۶ (سایر دارایی‌ها)</li>
+<li><strong>بدهی جاری:</strong> ۲۸، ۱۰، ۲۱، ۲۲، ۲۹ (پرداختنی‌ها)، ۵ و ۸ (ذخایر)، ۱۱ (پیش‌دریافت) · <strong>بدهی غیرجاری:</strong> ۱۲ و ۳۷ · <strong>سرمایه:</strong> ۲۵</li>
+<li><strong>حساب‌های انتظامی (تو متن ترازنامه نمیان):</strong> ۱۳، ۳۲، ۳۳</li>
+</ul>
+<p><strong>ترازنامه · مؤسسه رامسر · ۱۳۹۶/۱۲/۲۹ (دارایی‌ها)</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">ریال</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>دارایی‌های جاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>موجودی نقد (صندوق، بانک، وجوه در راه)</td>
+<td class="num">۱۶۲٬۵۹۶٬۳۵۵</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های کوتاه‌مدت</td>
+<td class="num">۱۳۲٬۶۱۸٬۷۵۰</td>
+</tr>
+<tr>
+<td>دریافتنی‌های تجاری و غیرتجاری (حساب‌های دریافتنی + مساعده کارکنان)</td>
+<td class="num">۸۶٬۶۲۵٬۵۰۰</td>
+</tr>
+<tr>
+<td>موجودی مواد و کالا (ساخته‌شده، در جریان ساخت، مواد اولیه، مواد مازاد، ملزومات)</td>
+<td class="num">۱۵۸٬۴۵۳٬۳۰۵</td>
+</tr>
+<tr>
+<td>پیش‌پرداخت‌ها (بیمه + خرید مواد اولیه)</td>
+<td class="num">۱۲۶٬۲۵۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دارایی‌های نگهداری‌شده برای فروش</td>
+<td class="num">۷۴۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های جاری</strong></td>
+<td class="num"><strong>۱٬۴۰۶٬۵۴۳٬۹۱۰</strong></td>
+</tr>
+<tr>
+<td><strong>دارایی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>دریافتنی‌های بلندمدت (حصه بلندمدت وام کارکنان)</td>
+<td class="num">۱۵۲٬۸۸۲٬۰۰۰</td>
+</tr>
+<tr>
+<td>سرمایه‌گذاری‌های بلندمدت (سپرده ۵ ساله)</td>
+<td class="num">۳۲۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دارایی‌های نامشهود (امتیاز تلفن، امتیاز برق، حق اختراع)</td>
+<td class="num">۶۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>دارایی‌های ثابت مشهود (ساختمان − استهلاک انباشته + پیش‌پرداخت ماشین‌آلات)</td>
+<td class="num">۹۵۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>سایر دارایی‌ها (نقد مسدودشده)</td>
+<td class="num">۴۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌های غیرجاری</strong></td>
+<td class="num"><strong>۱٬۵۲۶٬۸۸۲٬۰۰۰</strong></td>
+</tr>
+<tr>
+<td><strong>جمع دارایی‌ها</strong></td>
+<td class="num"><strong>۲٬۹۳۳٬۴۲۵٬۹۱۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>بدهی‌ها و حقوق صاحبان سرمایه</strong></p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>شرح</th>
+<th class="num">ریال</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>بدهی‌های جاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>پرداختنی‌های تجاری و غیرتجاری</td>
+<td class="num">۲۱۳٬۶۶۹٬۵۰۰</td>
+</tr>
+<tr>
+<td>ذخایر (تضمین محصول + دستمزد ایام مرخصی)</td>
+<td class="num">۱۱۰٬۱۸۸٬۳۴۸</td>
+</tr>
+<tr>
+<td>پیش‌دریافت‌ها</td>
+<td class="num">۲۷٬۶۲۵٬۱۰۵</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های جاری</strong></td>
+<td class="num"><strong>۳۵۱٬۴۸۲٬۹۵۳</strong></td>
+</tr>
+<tr>
+<td><strong>بدهی‌های غیرجاری:</strong></td>
+<td class="num"></td>
+</tr>
+<tr>
+<td>تسهیلات مالی بلندمدت</td>
+<td class="num">۴۸۷٬۹۳۶٬۷۰۷</td>
+</tr>
+<tr>
+<td>ذخیره مزایای پایان خدمت کارکنان</td>
+<td class="num">۴۹۴٬۰۰۶٬۲۵۰</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌های غیرجاری</strong></td>
+<td class="num"><strong>۹۸۱٬۹۴۲٬۹۵۷</strong></td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌ها</strong></td>
+<td class="num"><strong>۱٬۳۳۳٬۴۲۵٬۹۱۰</strong></td>
+</tr>
+<tr>
+<td>حقوق صاحبان سرمایه: سرمایه</td>
+<td class="num">۱٬۶۰۰٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td><strong>جمع بدهی‌ها و حقوق صاحبان سرمایه</strong></td>
+<td class="num"><strong>۲٬۹۳۳٬۴۲۵٬۹۱۰</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>جمع دو طرف ترازنامه دقیقاً برابر شد: ۲٬۹۳۳٬۴۲۵٬۹۱۰ ریال</strong> ✅</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>حساب‌های انتظامی (بیرون از ترازنامه، در یادداشت‌ها)</th>
+<th class="num">مبلغ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>اسناد تضمینی دریافتی از کارکنان</td>
+<td class="num">۵۴٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>بدهی احتمالی ناشی از محکومیت در دادگاه</td>
+<td class="num">۷٬۰۰۰٬۰۰۰</td>
+</tr>
+<tr>
+<td>اسناد تسلیمی بابت تضمین قراردادها</td>
+<td class="num">۶۰۰٬۰۰۰٬۰۰۰</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>اسناد تضمینی دریافتی از کارکنان و اسناد تسلیمی بابت تضمین قراردادها «حساب‌های انتظامی»ان و بدهی احتمالی ناشی از محکومیت دادگاه «بدهی احتمالی» (قطعی نیست پس توی ترازنامه نمیاد).</p>
+</blockquote></section>
+<footer>جواب‌ها رو خودم حل کردم و تو کتاب نیست؛ فرض‌ها تو README پوشه آمده.</footer>
+</main></body></html>
