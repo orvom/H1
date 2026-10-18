@@ -12,7 +12,7 @@
 | ۴ · بستن حساب‌های مالی | [podman-4.md](podman-4.md) | ۱ تا ۱۷ |
 | ۵ · مالیات بر عملکرد | [podman-5.md](podman-5.md) | ۱ تا ۲۱ |
 
-جزوه‌ی مرور و سؤال‌های تشریحی پودمان ۱ تو [`../README.md`](../README.md) و [`../jozve-podman1.html`](../jozve-podman1.html) هست.
+جزوه‌ی کامل پنج پودمان (خلاصه، راه حل، سؤال‌های تشریحی محتمل، چک‌لیست) تو [`../jozve-kamel.html`](../jozve-kamel.html) هست؛ جزوه‌ی قدیمی پودمان ۱ هم تو [`../README.md`](../README.md) و [`../jozve-podman1.html`](../jozve-podman1.html).
 
 ## چطور کنترل شده؟
 
